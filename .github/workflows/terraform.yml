@@ -1,0 +1,29 @@
+name: Terraform CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  pre-commit-checks:
+    uses: ./.github/workflows/pre-commit-checks.yml
+    permissions:
+      contents: read
+    with:
+      terraform-version: ${{ vars.TERRAFORM_VERSION }}
+
+  module-validation:
+    uses: gds-tech-and-security/github-actions/.github/workflows/terraform-module-validation.yml@feat/add-reusable-workflows
+    name: Module Validation
+    needs: pre-commit-checks
+    with:
+      working-directory: .
+      terraform-version: ${{ vars.TERRAFORM_VERSION }}
