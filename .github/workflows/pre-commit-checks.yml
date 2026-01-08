@@ -50,10 +50,11 @@ jobs:
         with:
           terraform_version: ${{ inputs.terraform-version }}
 
-      # - name: Setup TFLint
-      #   uses: terraform-linters/setup-tflint@4cb9feea73331a35b422df102992a03a44a3bb33 # v6.2.1
-      #   with:
-      #     tflint_version: ${{ inputs.tflint-version }}
+      - name: Install TFLint
+        run: |
+          TFLINT_INSTALL_COMMIT="c932c4d51c367257ba67d7a57abe1b319dab437f" # v0.60.0
+          curl -sSfL "https://raw.githubusercontent.com/terraform-linters/tflint/${TFLINT_INSTALL_COMMIT}/install_linux.sh" | bash
+          tflint --version
 
       - name: Setup Trivy
         uses: aquasecurity/setup-trivy@e6c2c5e321ed9123bda567646e2f96565e34abe1 # v0.2.4
@@ -70,7 +71,7 @@ jobs:
           # Find all directories with .tf files and init them
           find . -type f -name "*.tf" -not -path "*/.terraform/*" -exec dirname {} \; | sort -u | while read dir; do
             echo "Initializing $dir"
-            (cd "$dir" && terraform init -backend=false)
+            (cd "$dir" && terraform init -backend=false -upgrade)
           done
 
       - name: Run pre-commit
