@@ -71,7 +71,7 @@ jobs:
           # Find all directories with .tf files and init them
           find . -type f -name "*.tf" -not -path "*/.terraform/*" -exec dirname {} \; | sort -u | while read dir; do
             echo "Initializing $dir"
-            (cd "$dir" && terraform init -backend=false -upgrade)
+            (cd "$dir" && terraform init -backend=false)
           done
 
       - name: Run pre-commit
