@@ -14,11 +14,12 @@ permissions:
 
 jobs:
   pre-commit-checks:
-    uses: ./.github/workflows/pre-commit-checks.yml
+    uses: gds-tech-and-security/github-actions/.github/workflows/pre-commit-checks.yml@feat/add-reusable-workflows
     permissions:
       contents: read
     with:
       terraform-version: ${{ vars.TERRAFORM_VERSION }}
+      runs-on: static_ip_runner
 
   # module-validation:
   #   uses: gds-tech-and-security/github-actions/.github/workflows/terraform-module-validation.yml@feat/add-reusable-workflows
