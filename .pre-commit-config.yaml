@@ -86,9 +86,13 @@ repos:
       #     - --hook-config=--add-to-existing-file=true
       #     - --hook-config=--create-file-if-not-exist=true
       - id: terraform_validate
+        # TODO: Add future module directories here or a sensible regex to match them all
+        files: ^terraform-azurerm-conditional-access/
         args:
           - --args=-json
           - --args=-no-color
+          - --hook-config=--retry-once-with-cleanup=true
+          - --tf-init-args=-upgrade
       - id: terraform_tflint
         args:
           - --args=--recursive
