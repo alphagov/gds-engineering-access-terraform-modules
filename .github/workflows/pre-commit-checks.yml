@@ -1,0 +1,79 @@
+name: Pre-Commit Checks
+
+on:
+  workflow_call:
+    inputs:
+      python-version:
+        description: 'Python version to use'
+        required: false
+        type: string
+        default: '3.12.3'
+      terraform-version:
+        description: 'Terraform version to use'
+        required: false
+        type: string
+        default: '1.11.2'
+      tflint-version:
+        description: 'TFLint version to use'
+        required: false
+        type: string
+        default: 'latest'
+      trivy-version:
+        description: 'Trivy version to use'
+        required: false
+        type: string
+        default: 'latest'
+      skip-hooks:
+        description: 'Comma-separated list of hooks to skip'
+        required: false
+        type: string
+        default: 'conventional-branch-name'
+
+permissions:
+  contents: read
+
+jobs:
+  pre-commit:
+    name: Pre-Commit Checks
+    runs-on: static_ip_runner
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
+
+      - name: Setup Python
+        uses: actions/setup-python@83679a892e2d95755f2dac6acb0bfd1e9ac5d548 # v6.1.0
+        with:
+          python-version: ${{ inputs.python-version }}
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@b9cd54a3c349d3f38e8881555d616ced269862dd # v3
+        with:
+          terraform_version: ${{ inputs.terraform-version }}
+
+      - name: Install TFLint
+        run: |
+          TFLINT_INSTALL_COMMIT="c932c4d51c367257ba67d7a57abe1b319dab437f" # v0.60.0
+          curl -sSfL "https://raw.githubusercontent.com/terraform-linters/tflint/${TFLINT_INSTALL_COMMIT}/install_linux.sh" | bash
+          tflint --version
+
+      - name: Setup Trivy
+        uses: aquasecurity/setup-trivy@e6c2c5e321ed9123bda567646e2f96565e34abe1 # v0.2.4
+        with:
+          version: ${{ inputs.trivy-version }}
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install --require-hashes -r requirements.txt
+
+      - name: Initialize Terraform
+        run: |
+          # Find all directories with .tf files and init them
+          find . -type f -name "*.tf" -not -path "*/.terraform/*" -exec dirname {} \; | sort -u | while read dir; do
+            echo "Initializing $dir"
+            (cd "$dir" && terraform init -backend=false)
+          done
+
+      - name: Run pre-commit
+        run: |
+          SKIP=${{ inputs.skip-hooks }} pre-commit run --all-files
