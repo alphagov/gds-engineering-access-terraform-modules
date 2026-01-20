@@ -11,5 +11,5 @@ permissions:
 
 jobs:
   release:
-    uses: gds-tech-and-security/github-actions/.github/workflows/terraform-module-release.yml@feat/add-reusable-workflows
+    uses: alphagov/gds-github-workflows/.github/workflows/terraform-module-release.yml@feat/add-reusable-workflows-for-tf-module-validation
     name: GitHub Release
