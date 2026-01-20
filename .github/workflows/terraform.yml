@@ -14,7 +14,7 @@ permissions:
 
 jobs:
   pre-commit-checks:
-    uses: ./.github/workflows/pre-commit-checks.yml@feat/add-reusable-workflows-for-tf-module-validation
+    uses: ./.github/workflows/pre-commit-checks.yml
     permissions:
       contents: read
     with:
