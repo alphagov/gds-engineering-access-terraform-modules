@@ -1,3 +1,5 @@
+# To add more modules in the future, simply add them to the filters section
+
 name: Terraform CI
 
 on:
@@ -20,10 +22,29 @@ jobs:
     with:
       terraform-version: ${{ vars.TERRAFORM_VERSION }}
 
+  detect-changes:
+    runs-on: ubuntu-latest
+    outputs:
+      modules: ${{ steps.filter.outputs.changes }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: dorny/paths-filter@de90cc6fb38fc0963ad72b210f1f284cd68cea36 # v3.0.2
+        id: filter
+        with:
+          filters: |
+            terraform-azurerm-conditional-access:
+              - 'terraform-azurerm-conditional-access/**'
+
   module-validation:
     uses: alphagov/gds-github-workflows/.github/workflows/terraform-module-validation.yml@feat/add-reusable-workflows-for-tf-module-validation
     name: Module Validation
-    needs: pre-commit-checks
+    needs: [pre-commit-checks, detect-changes]
+    if: needs.detect-changes.outputs.modules != '[]'
+    strategy:
+      matrix:
+        module: ${{ fromJson(needs.detect-changes.outputs.modules) }}
     with:
       working-directory: .
       terraform-version: ${{ vars.TERRAFORM_VERSION }}
+      terraform-dir: ${{ matrix.module }}
