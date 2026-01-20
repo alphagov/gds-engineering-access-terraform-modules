@@ -2,9 +2,8 @@ name: Terraform CI
 
 on:
   push:
-    branches:
-      - main
-      - feat/revert-workflows
+    # branches:
+    #   - main
   pull_request:
     branches:
       - main
