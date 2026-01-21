@@ -20,7 +20,7 @@ If pre-commit detects issues when you attempt to commit changes, a dialogue box 
 ![pre-commit](./docs/pre-commit.png)
 
 > [!IMPORTANT]
-> This README was created, and is maintained by the terraform-docs utility. When making terraform changes, please run the following command in the root of the repository before committing them (the terraform-docs 'pre-commit hook' for this [appears to be broken](https://github.com/terraform-docs/terraform-docs/issues/836) at present):
+> This README was created, and is maintained by terraform-docs. A pre-commit hook is configured to run this utility automatically; you can also run it manually as shown below:
 
 ```zsh
 terraform-docs markdown table --indent 2 --output-mode inject --output-file README.md ./terraform-azurerm-<module name suffix>
