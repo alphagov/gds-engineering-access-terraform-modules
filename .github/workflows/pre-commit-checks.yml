@@ -70,7 +70,7 @@ jobs:
           pip install --require-hashes -r requirements.txt
 
           curl -sSLo terraform-docs.tar.gz "https://github.com/terraform-docs/terraform-docs/releases/download/${{ env.TERRAFORM_DOCS_VERSION }}/terraform-docs-${{ env.TERRAFORM_DOCS_VERSION }}-linux-amd64.tar.gz"
-          echo "${{ env.TERRAFORM_DOCS_SHA256 }} terraform-docs.tar.gz" | sha256sum -c -
+          echo "${{ env.TERRAFORM_DOCS_SHA256 }}  terraform-docs.tar.gz" | sha256sum -c -
           tar -xzf terraform-docs.tar.gz
           chmod +x terraform-docs
           mv terraform-docs /usr/local/bin/terraform-docs
