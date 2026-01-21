@@ -4,12 +4,33 @@ name: Release
 on:
   push:
     tags:
-      - "v*"
+      - "*/v*"  # Matches tags like terraform-azurerm-conditional-access/v1.0.0
 
 permissions:
   contents: write
 
 jobs:
+  extract-module:
+    name: Extract Module Info
+    runs-on: ubuntu-latest
+    outputs:
+      module-name: ${{ steps.extract.outputs.module }}
+      version: ${{ steps.extract.outputs.version }}
+    steps:
+      - name: Extract module and version from tag
+        id: extract
+        run: |
+          TAG="${GITHUB_REF#refs/tags/}"
+          MODULE="${TAG%/v*}"
+          VERSION="${TAG#*/}"
+          echo "module=${MODULE}" >> "$GITHUB_OUTPUT"
+          echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
+          echo "Module: ${MODULE}, Version: ${VERSION}"
+
   release:
-    uses: gds-tech-and-security/github-actions/.github/workflows/terraform-module-release.yml@feat/add-reusable-workflows
+    uses: alphagov/gds-github-workflows/.github/workflows/terraform-module-release.yml@main
     name: GitHub Release
+    needs: extract-module
+    with:
+      module-name: ${{ needs.extract-module.outputs.module-name }}
+      version: ${{ needs.extract-module.outputs.version }}

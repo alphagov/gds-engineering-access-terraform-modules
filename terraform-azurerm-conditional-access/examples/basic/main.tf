@@ -32,7 +32,7 @@ module "conditional_access_policies" {
   included_users                    = lookup(each.value, "included_users", ["All"])
   excluded_groups                   = each.value["excluded_groups"]
   exclude_guests                    = lookup(each.value, "exclude_guests", false)
-  grant_operator                    = lookup(each.value, "grant_operator", "AND")
+  grant_operator                    = lookup(each.value, "grant_operator", "OR")
   built_in_controls                 = lookup(each.value, "built_in_controls", null)
   authentication_strength_policy_id = lookup(each.value, "authentication_strength_policy_id", null)
   sign_in_risk_levels               = lookup(each.value, "sign_in_risk_levels", [])
