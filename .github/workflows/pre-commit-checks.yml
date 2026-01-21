@@ -35,7 +35,7 @@ permissions:
 jobs:
   pre-commit:
     name: Pre-Commit Checks
-    runs-on: static_ip_runner
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
@@ -50,11 +50,10 @@ jobs:
         with:
           terraform_version: ${{ inputs.terraform-version }}
 
-      - name: Install TFLint
-        run: |
-          TFLINT_INSTALL_COMMIT="c932c4d51c367257ba67d7a57abe1b319dab437f" # v0.60.0
-          curl -sSfL "https://raw.githubusercontent.com/terraform-linters/tflint/${TFLINT_INSTALL_COMMIT}/install_linux.sh" | bash
-          tflint --version
+      - name: Setup TFLint
+        uses: terraform-linters/setup-tflint@4cb9feea73331a35b422df102992a03a44a3bb33 # v6.2.1
+        with:
+          tflint_version: ${{ inputs.tflint-version }}
 
       - name: Setup Trivy
         uses: aquasecurity/setup-trivy@e6c2c5e321ed9123bda567646e2f96565e34abe1 # v0.2.4
