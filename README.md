@@ -7,7 +7,7 @@ Repo where we store reusable terraform modules for the gds-entra solution.
 1. This repository uses pre-commit. Please install prerequisite tools first:
 
 ```zsh
-brew install tflint checkov trivy terraform-docs
+brew install tflint checkov trivy terraform-docs codespell
 ```
 
 > [!IMPORTANT]
