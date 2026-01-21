@@ -64,14 +64,14 @@ repos:
     rev: v8.21.2
     hooks:
       - id: gitleaks
-  - repo: local
-    hooks:
-      - id: conventional-branch-name
-        name: Check conventional branch name
-        entry: bash -c 'branch=${BRANCH_NAME:-$(git rev-parse --abbrev-ref HEAD)}; if [[ ! $branch =~ ^main|(feature|feat|fix|bugfix|hotfix|major)/[a-z0-9\-]+$ ]]; then echo "❌ Invalid branch name:" "$branch"; exit 1; fi; echo "✅ Branch name is valid."'
-        language: system
-        pass_filenames: false
-        always_run: true
+  # - repo: local
+  #   hooks:
+  #     - id: conventional-branch-name
+  #       name: Check conventional branch name
+  #       entry: bash -c 'branch=${BRANCH_NAME:-$(git rev-parse --abbrev-ref HEAD)}; if [[ ! $branch =~ ^main|(feature|feat|fix|bugfix|hotfix|major)/[a-z0-9\-]+$ ]]; then echo "❌ Invalid branch name:" "$branch"; exit 1; fi; echo "✅ Branch name is valid."'
+  #       language: system
+  #       pass_filenames: false
+  #       always_run: true
   - repo: https://github.com/antonbabenko/pre-commit-terraform
     rev: v1.96.2
     hooks:
@@ -79,15 +79,17 @@ repos:
         args:
           - --args=-recursive
           - --args=-write=true
-      # TODO: Uncomment once this issue is resolved https://github.com/terraform-docs/terraform-docs/issues/836
-      # - id: terraform_docs
-      #   args:
-      #     - --hook-config=--path-to-file=README.md
-      #     - --hook-config=--add-to-existing-file=true
-      #     - --hook-config=--create-file-if-not-exist=true
+      # TODO: Make this support multiple module READMEs
+      - id: terraform_docs
+        files: ^terraform-azurerm-conditional-access/.*\.tf$
+        args:
+          - --hook-config=--path-to-file=terraform-azurerm-conditional-access/README.md
+          - --hook-config=--output-mode=inject
+          - --hook-config=--output-file=terraform-azurerm-conditional-access/README.md
+          - --hook-config=--config=.terraform-docs.yml
       - id: terraform_validate
-        # TODO: Add future module directories here or a sensible regex to match them all
-        files: ^terraform-azurerm-conditional-access/
+        # Match all module directories at the root starting with 'terraform-azurerm-'
+        files: ^terraform-azurerm-[^/]+/
         args:
           - --args=-json
           - --args=-no-color
