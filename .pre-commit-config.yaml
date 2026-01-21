@@ -79,12 +79,11 @@ repos:
         args:
           - --args=-recursive
           - --args=-write=true
-      # TODO: Uncomment once this issue is resolved https://github.com/terraform-docs/terraform-docs/issues/836
-      # - id: terraform_docs
-      #   args:
-      #     - --hook-config=--path-to-file=README.md
-      #     - --hook-config=--add-to-existing-file=true
-      #     - --hook-config=--create-file-if-not-exist=true
+      - id: terraform_docs
+        args:
+          - --hook-config=--path-to-file=README.md
+          - --hook-config=--add-to-existing-file=true
+          - --hook-config=--create-file-if-not-exist=true
       - id: terraform_validate
         # TODO: Add future module directories here or a sensible regex to match them all
         files: ^terraform-azurerm-conditional-access/
