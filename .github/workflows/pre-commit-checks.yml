@@ -34,7 +34,7 @@ permissions:
 
 env:
   TERRAFORM_DOCS_VERSION: v0.21.0
-  TERRAFORM_DOCS_SHA256: ddf4b53925d857ae81210ebeda32b429a17385d6e4561ab1972067a9ccb36873
+  TERRAFORM_DOCS_SHA256: 2fdd81b8d21ff1498cd559af0dcc5d155835f84600db06d3923e217124fc735a
 
 jobs:
   pre-commit:
@@ -69,9 +69,11 @@ jobs:
           python -m pip install --upgrade pip
           pip install --require-hashes -r requirements.txt
 
-          curl -sSLo terraform-docs.tar.gz "https://github.com/terraform-docs/terraform-docs/releases/download/${{ env.TERRAFORM_DOCS_VERSION }}/terraform-docs-${{ env.TERRAFORM_DOCS_VERSION }}-linux-amd64.tar.gz"
-          echo "${{ env.TERRAFORM_DOCS_SHA256 }}  terraform-docs.tar.gz" | sha256sum -c -
-          tar -xzf terraform-docs.tar.gz
+      - name: Install terraform-docs
+        run: |
+          curl -sSLo terraform-docs-v0.21.0-linux-amd64.tar.gz "https://github.com/terraform-docs/terraform-docs/releases/download/${{ env.TERRAFORM_DOCS_VERSION }}/terraform-docs-v0.21.0-linux-amd64.tar.gz"
+          echo "${{ env.TERRAFORM_DOCS_SHA256 }}  terraform-docs-v0.21.0-linux-amd64.tar.gz" | sha256sum -c -
+          tar -xzf terraform-docs-v0.21.0-linux-amd64.tar.gz
           chmod +x terraform-docs
           mv terraform-docs /usr/local/bin/terraform-docs
 
