@@ -20,8 +20,19 @@ If pre-commit detects issues when you attempt to commit changes, a dialogue box 
 ![pre-commit](./docs/pre-commit.png)
 
 > [!IMPORTANT]
-> This README was created, and is maintained by the terraform-docs utility. When making terraform changes, please run the following command in the root of the repository before committing them (the terraform-docs 'pre-commit hook' for this [appears to be broken](https://github.com/terraform-docs/terraform-docs/issues/836) at present):
+> This README was created, and is maintained by terraform-docs. A pre-commit hook is configured to run this utility automatically; you can also run it manually as shown below:
 
 ```zsh
 terraform-docs markdown table --indent 2 --output-mode inject --output-file README.md ./terraform-azurerm-<module name suffix>
 ```
+
+## Releasing Individual Modules
+
+To release a new version of a specific module, create and push a git tag that matches the module's directory name and desired version. For example, to release version 1.2.3 of the `terraform-azurerm-conditional-access` module:
+
+```sh
+git tag terraform-azurerm-conditional-access/v1.2.3
+git push origin terraform-azurerm-conditional-access/v1.2.3
+```
+
+This will trigger the release workflow for that module only. Each module should be tagged and released independently using this pattern.
