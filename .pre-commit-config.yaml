@@ -79,12 +79,14 @@ repos:
         args:
           - --args=-recursive
           - --args=-write=true
+      # TODO: Make this support multiple module READMEs
       - id: terraform_docs
+        files: ^terraform-azurerm-conditional-access/.*\.tf$
         args:
-          # TODO: Add support for multiple module directories
           - --hook-config=--path-to-file=terraform-azurerm-conditional-access/README.md
-          - --hook-config=--add-to-existing-file=true
-          - --hook-config=--create-file-if-not-exist=true
+          - --hook-config=--output-mode=inject
+          - --hook-config=--output-file=terraform-azurerm-conditional-access/README.md
+          - --hook-config=--config=.terraform-docs.yml
       - id: terraform_validate
         # Match all module directories at the root starting with 'terraform-azurerm-'
         files: ^terraform-azurerm-[^/]+/

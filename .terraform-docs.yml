@@ -1,4 +1,4 @@
-#header-from: .header.md
+
 settings:
   anchor: true
   color: true
@@ -14,7 +14,8 @@ settings:
 formatter: "markdown table"
 
 output:
-  file: README.md
+  # TODO: Make this support multiple module READMEs
+  file: terraform-azurerm-conditional-access/README.md
   mode: inject
 
 sections:
