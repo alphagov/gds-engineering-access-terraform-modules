@@ -85,8 +85,8 @@ repos:
           - --hook-config=--add-to-existing-file=true
           - --hook-config=--create-file-if-not-exist=true
       - id: terraform_validate
-        # TODO: Add future module directories here or a sensible regex to match them all
-        files: ^terraform-azurerm-conditional-access/
+        # Match all module directories at the root starting with 'terraform-azurerm-'
+        files: ^terraform-azurerm-[^/]+/
         args:
           - --args=-json
           - --args=-no-color

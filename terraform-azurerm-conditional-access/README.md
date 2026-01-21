@@ -159,7 +159,6 @@ No modules.
 | <a name="input_excluded_groups"></a> [excluded\_groups](#input\_excluded\_groups) | List of group IDs to exclude from conditional access policies (break glass accounts) | `list(string)` | n/a | yes |
 | <a name="input_excluded_locations"></a> [excluded\_locations](#input\_excluded\_locations) | List of location names to exclude | `list(string)` | `[]` | no |
 | <a name="input_grant_operator"></a> [grant\_operator](#input\_grant\_operator) | Grant controls operator: OR or AND | `string` | `"OR"` | no |
-| <a name="input_included_applications"></a> [included\_applications](#input\_included\_applications) | List of application IDs to include | `list(string)` | <pre>[<br/>  "All"<br/>]</pre> | no |
 | <a name="input_included_locations"></a> [included\_locations](#input\_included\_locations) | List of location names to include | `list(string)` | `[]` | no |
 | <a name="input_included_user_actions"></a> [included\_user\_actions](#input\_included\_user\_actions) | List of user actions to include | `list(string)` | `null` | no |
 | <a name="input_included_users"></a> [included\_users](#input\_included\_users) | List of user IDs or groups to include | `list(string)` | <pre>[<br/>  "All"<br/>]</pre> | no |
@@ -173,7 +172,7 @@ No modules.
 
 | Name | Description |
 |------|-------------|
-| <a name="output_policy_display_name"></a> [policy\_display\_name](#output\_policy\_display\_name) | The display name of the conditional access policy. |
-| <a name="output_policy_id"></a> [policy\_id](#output\_policy\_id) | The ID of the conditional access policy. |
-| <a name="output_policy_object_id"></a> [policy\_object\_id](#output\_policy\_object\_id) | The object ID of the conditional access policy. |
+| <a name="output_policy_display_name"></a> [policy\_display\_name](#output\_policy\_display\_name) | The display name of the conditional access policy |
+| <a name="output_policy_id"></a> [policy\_id](#output\_policy\_id) | The ID of the conditional access policy |
+| <a name="output_policy_object_id"></a> [policy\_object\_id](#output\_policy\_object\_id) | The object ID of the conditional access policy |
 <!-- END_TF_DOCS -->
