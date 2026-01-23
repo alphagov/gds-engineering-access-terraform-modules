@@ -1,4 +1,3 @@
-# The domain name is represented by the domain ID. It is an immutable identifier in Microsoft Graph, and therefore it cannot be changed.
 # This resource is used to store the input in the terraform state once, so it can be checked against changes later
 resource "terraform_data" "domain_name" {
   input = var.name
