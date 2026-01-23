@@ -31,7 +31,14 @@ resource "msgraph_resource" "this_domain" {
 data "msgraph_resource" "domain_verification_dns_records" {
   url = "domains/${msgraph_resource.this_domain.output.all.id}/verificationDnsRecords"
   response_export_values = {
-    all = "@"
+    all = "value"
+  }
+
+  lifecycle {
+    postcondition {
+      condition     = length(self.response_export_values.all) > 0
+      error_message = "No DNS records were returned for the domain."
+    }
   }
 }
 
