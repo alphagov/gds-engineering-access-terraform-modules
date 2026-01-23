@@ -1,21 +1,29 @@
-# Create domain
-# The domain name is represented by the domain ID. It cannot be changed since it is an immutable identifier in Microsoft Graph.
-resource "msgraph_resource" "this_domain" {
-  url = "domains"
-  body = {
-    id = var.name
-  }
+# The domain name is represented by the domain ID. It is an immutable identifier in Microsoft Graph, and therefore it cannot be changed.
+# This resource is used to store the input in the terraform state once, so it can be checked against changes later
+resource "terraform_data" "domain_name" {
+  input = var.name
 
-  response_export_values = {
-    all = "@"
+  lifecycle {
+    ignore_changes = [input]
   }
 }
 
-# Retrieve the status of the domain after its creation
-data "msgraph_resource" "domain_status" {
-  url = "domains/${msgraph_resource.this_domain.output.all.id}"
+# Create domain
+resource "msgraph_resource" "this_domain" {
+  url = "domains"
+  body = {
+    id = terraform_data.domain_name.output
+  }
+
   response_export_values = {
     all = "@"
+  }
+
+  lifecycle {
+    precondition {
+      condition     = var.name == terraform_data.domain_name.output
+      error_message = "The domain name is immutable and cannot be changed."
+    }
   }
 }
 
@@ -35,10 +43,10 @@ resource "msgraph_resource_action" "domain_verify" {
   action       = "verify"
   method       = "POST"
 
-  depends_on = [data.msgraph_resource.domain_status]
+  depends_on = [msgraph_resource.this_domain]
 
   lifecycle {
-    # Ignore any change to prevent trying to verify more than once. Since the ID cannot be modified, this is safe to do
+    # Ignore any changes to prevent verifying more than once
     ignore_changes = all
   }
 }
