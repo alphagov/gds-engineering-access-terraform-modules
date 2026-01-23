@@ -5,7 +5,7 @@ resource "msgraph_resource" "this_domain" {
   body = {
     id = var.name
   }
-  update_method = "PATCH"
+
   response_export_values = {
     all = "@"
   }
@@ -41,4 +41,17 @@ resource "msgraph_resource_action" "domain_verify" {
     # Ignore any change to prevent trying to verify more than once. Since the ID cannot be modified, this is safe to do
     ignore_changes = all
   }
+}
+
+# Change properties of the domain. These can only be changed after the domain has been verified
+resource "msgraph_resource_action" "update_domain" {
+  count = var.verify ? 1 : 0
+
+  resource_url = "domains/${msgraph_resource.this_domain.output.all.id}"
+  method       = "PATCH"
+  body = {
+    isDefault = var.default
+  }
+
+  depends_on = [msgraph_resource_action.domain_verify]
 }
