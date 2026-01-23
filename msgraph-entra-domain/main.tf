@@ -58,9 +58,9 @@ resource "msgraph_resource_action" "domain_verify" {
   }
 }
 
-# Change properties of the domain. These can only be changed after the domain has been verified
+# Change domain properties. These can only be updated after the domain has been verified
 resource "msgraph_resource_action" "update_domain" {
-  count = var.verify ? 1 : 0
+  count = var.verify && var.default ? 1 : 0
 
   resource_url = "domains/${msgraph_resource.this_domain.output.all.id}"
   method       = "PATCH"
