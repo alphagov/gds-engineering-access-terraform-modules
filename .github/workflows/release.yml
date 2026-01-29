@@ -33,13 +33,20 @@ jobs:
 
       # Zips up the module to be picked up by the next job (softprops/action-gh-release action in the reusable workflow).
       - name: Zip module directory
+        shell: pwsh
         id: zip
         run: |
-          MODULE_DIR="${{ steps.extract.outputs.module }}"
-          ZIP_FILE="${MODULE_DIR}.zip"
-          cd "${MODULE_DIR}" || exit 1
-          zip -r "${ZIP_FILE}" .
-          echo "zip-file=${MODULE_DIR}/${ZIP_FILE}" >> "$GITHUB_OUTPUT"
+          $compress = @{
+            Path = '${{ steps.extract.outputs.module }}'
+            DestinationPath = '${{ steps.extract.outputs.module }}.zip'
+            Passthru = $true
+          }
+          $zipFilePath = Compress-Archive @compress |
+          Select-Object -ExpandProperty FullName
+
+          Write-Output -InputObject "setting output zip-file=$zipFilePath"
+          Write-Output -InputObject "zip-file=$zipFilePath" |
+          Out-File -FilePath $env:GITHUB_OUTPUT -Append
 
   release:
     uses: alphagov/gds-github-workflows/.github/workflows/terraform-module-release.yml@add-working-directory-param
@@ -49,5 +56,4 @@ jobs:
       module-name: ${{ needs.extract-module.outputs.module-name }}
       version: ${{ needs.extract-module.outputs.version }}
       enable-cliff: false
-      working-directory: ${{ needs.extract-module.outputs.module-name }}
       files: ${{ needs.extract-module.outputs.zip-file }}
