@@ -17,9 +17,6 @@ jobs:
       module-name: ${{ steps.extract.outputs.module }}
       version: ${{ steps.extract.outputs.version }}
     steps:
-      - name: Checkout code
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-
       - name: Extract module and version from tag
         id: extract
         run: |
