@@ -38,5 +38,3 @@ jobs:
     with:
       module-name: ${{ needs.extract-module.outputs.module-name }}
       version: ${{ needs.extract-module.outputs.version }}
-      enable-cliff: false
-      sparse-checkout: ${{ needs.extract-module.outputs.module-name }}
