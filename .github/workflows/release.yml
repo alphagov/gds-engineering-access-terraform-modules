@@ -41,11 +41,11 @@ jobs:
             DestinationPath = '${{ steps.extract.outputs.module }}.zip'
             Passthru = $true
           }
-          $zipFilePath = Compress-Archive @compress |
-          Select-Object -ExpandProperty FullName
+          $zipFileName = Compress-Archive @compress |
+          Select-Object -ExpandProperty Name
 
-          Write-Output -InputObject "setting output zip-file=$zipFilePath"
-          Write-Output -InputObject "zip-file=$zipFilePath" |
+          Write-Output -InputObject "setting output zip-file=$zipFileName"
+          Write-Output -InputObject "zip-file=$zipFileName" |
           Out-File -FilePath $env:GITHUB_OUTPUT -Append
 
   release:
