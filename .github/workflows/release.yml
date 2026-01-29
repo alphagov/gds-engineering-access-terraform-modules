@@ -31,23 +31,6 @@ jobs:
           echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
           echo "Module: ${MODULE}, Version: ${VERSION}"
 
-      # Zips up the module to be picked up by the next job (softprops/action-gh-release action in the reusable workflow).
-      - name: Zip module directory
-        shell: pwsh
-        id: zip
-        run: |
-          $compress = @{
-            Path = '${{ steps.extract.outputs.module }}'
-            DestinationPath = '${{ steps.extract.outputs.module }}.zip'
-            Passthru = $true
-          }
-          $zipFileName = Compress-Archive @compress |
-          Select-Object -ExpandProperty Name
-
-          Write-Output -InputObject "setting output zip-file=$zipFileName"
-          Write-Output -InputObject "zip-file=$zipFileName" |
-          Out-File -FilePath $env:GITHUB_OUTPUT -Append
-
   release:
     uses: alphagov/gds-github-workflows/.github/workflows/terraform-module-release.yml@add-working-directory-param
     name: GitHub Release
@@ -56,4 +39,4 @@ jobs:
       module-name: ${{ needs.extract-module.outputs.module-name }}
       version: ${{ needs.extract-module.outputs.version }}
       enable-cliff: false
-      files: ${{ needs.extract-module.outputs.zip-file }}
+      sparse-checkout: ${{ needs.extract-module.outputs.module-name }}
