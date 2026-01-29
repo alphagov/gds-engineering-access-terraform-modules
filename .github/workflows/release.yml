@@ -28,7 +28,7 @@ jobs:
           echo "Module: ${MODULE}, Version: ${VERSION}"
 
   release:
-    uses: alphagov/gds-github-workflows/.github/workflows/terraform-module-release.yml@add-working-directory-param
+    uses: alphagov/gds-github-workflows/.github/workflows/terraform-module-release.yml@main
     name: GitHub Release
     needs: extract-module
     with:
