@@ -28,7 +28,7 @@ terraform-docs markdown table --indent 2 --output-mode inject --output-file READ
 
 ## Releasing Individual Modules
 
-To release a new version of a specific module, create and push a git tag matching the module's directory name and desired version. For example, to release version 0.0.12 of the `terraform-azurerm-conditional-access` module, you would run these commands from the root of the checked out repository:
+To release a new version of a specific module, create and push a git tag matching the module's directory name and desired version. For example, to release version 0.0.1 of the `terraform-azurerm-conditional-access` module, you would run these commands from the root of the checked out repository:
 
 ```sh
 git tag terraform-azurerm-conditional-access/v0.0.1 -m 'Initial release'
