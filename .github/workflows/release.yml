@@ -32,6 +32,8 @@ jobs:
       - name: Zip module directory
         id: zip
         run: |
+          echo "pwd: $(pwd)"
+          ls -a
           MODULE_DIR="${{ steps.extract.outputs.module }}"
           ZIP_FILE="${MODULE_DIR}.zip"
           cd "${MODULE_DIR}" || exit 1
