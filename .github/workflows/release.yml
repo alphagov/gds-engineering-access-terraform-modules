@@ -40,8 +40,8 @@ jobs:
           MODULE_DIR="${{ steps.extract.outputs.module }}"
           ZIP_FILE="${MODULE_DIR}.zip"
           cd "${MODULE_DIR}" || exit 1
-          zip -r "../${ZIP_FILE}" .
-          echo "zip-file=${ZIP_FILE}" >> "$GITHUB_OUTPUT"
+          zip -r "${ZIP_FILE}" .
+          echo "zip-file=${MODULE_DIR}/${ZIP_FILE}" >> "$GITHUB_OUTPUT"
 
   release:
     uses: alphagov/gds-github-workflows/.github/workflows/terraform-module-release.yml@add-working-directory-param
