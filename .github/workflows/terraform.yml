@@ -34,8 +34,8 @@ jobs:
         id: filter
         with:
           filters: |
-            terraform-azurerm-conditional-access:
-              - 'terraform-azurerm-conditional-access/**'
+            azurerm-conditional-access:
+              - 'azurerm-conditional-access/**'
             msgraph-entra-domain:
               - 'msgraph-entra-domain/**'
 
