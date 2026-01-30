@@ -47,7 +47,7 @@ This will trigger the release workflow for that module only. Each module should 
 
 ```hcl
 module "terraform-azurerm-conditional-access" {
-  source = "https://github.com/alphagov/gds-engineering-access-terraform-modules/releases/download/terraform-azurerm-conditional-access_v0.0.1/terraform-azurerm-conditional-access_v0.0.1.zip"
+  source = "https://github.com/alphagov/gds-engineering-access-terraform-modules/releases/download/terraform-azurerm-conditional-access%2Fv0.0.1/terraform-azurerm-conditional-access_v0.0.1.zip"
   #...
 }
 ```
