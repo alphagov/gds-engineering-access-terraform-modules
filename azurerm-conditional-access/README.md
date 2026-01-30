@@ -7,7 +7,7 @@
 
 ![Github Actions](../../actions/workflows/terraform.yml/badge.svg)
 
-# terraform-azurerm-conditional-access
+# azurerm-conditional-access
 
 ## Description
 

@@ -4,7 +4,7 @@ name: Release
 on:
   push:
     tags:
-      - "*/v*"  # Matches tags like terraform-azurerm-conditional-access/v1.0.0
+      - "*/v*"  # Matches tags like azurerm-conditional-access/v1.0.0
 
 permissions:
   contents: write
