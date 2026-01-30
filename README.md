@@ -39,15 +39,31 @@ This will trigger the release workflow for that module only. Each module should 
 
 ## Consuming Modules
 
-1. On the [Releases page](https://github.com/alphagov/gds-engineering-access-terraform-modules/releases), find your desired module/version combination, ensure the Assets drop-down list is expanded, then right click the module asset (azurerm-conditional-access_v0.0.1.zip in this case) and select 'Copy Link':
+1. On the [Releases page](https://github.com/alphagov/gds-engineering-access-terraform-modules/releases), find your desired module/version combination and click on the short commit SHA hash:
 
 ![assets](./docs/assets.png)
 
-2. Use this URI in the module source argument:
+2. On the commit page, click the copy button to retrieve the full commit SHA hash:
+
+![assets](./docs/sha.png)
+
+3. Reference the module in the source argument of your module block. Add a comment to indicate the release version this commit SHA represents.
 
 ```hcl
 module "azurerm-conditional-access" {
-  source = "https://github.com/alphagov/gds-engineering-access-terraform-modules/releases/download/azurerm-conditional-access%2Fv0.0.1/azurerm-conditional-access_v0.0.1.zip"
+  source = "github.com/alphagov/gds-engineering-access-terraform-modules//<module name>?ref=<commit sha hash>" # <release version>
   #...
 }
 ```
+
+```hcl
+# Example
+
+module "azurerm-conditional-access" {
+  source = "github.com/alphagov/gds-engineering-access-terraform-modules//azurerm-conditional-access?ref=303d8966acf114429f8613fa070a1848c2ff3661" # v0.0.1
+  #...
+}
+```
+
+> [!NOTE]
+> The double forward slash is required syntax when referencing a module in a repository subdirectory.
