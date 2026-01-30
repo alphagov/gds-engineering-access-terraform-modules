@@ -26,6 +26,10 @@ If pre-commit detects issues when you attempt to commit changes, a dialogue box 
 terraform-docs markdown table --indent 2 --output-mode inject --output-file README.md ./terraform-azurerm-<module name suffix>
 ```
 
+## Creating New Modules
+
+Please ensure you place an appropriate .tflint.hcl file in your new module subdirectory to ensure pre-commit checks pass (you can copy this from one of the existing modules).
+
 ## Releasing Individual Modules
 
 To release a new version of a specific module, create and push a git tag matching the module's directory name and desired version. For example, to release version 0.0.1 of the `azurerm-conditional-access` module, you would run the commands below from the root of the checked out repository:

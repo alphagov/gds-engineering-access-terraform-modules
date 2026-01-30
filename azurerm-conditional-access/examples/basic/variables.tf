@@ -1,9 +1,3 @@
-variable "reporting_only_for_all_policies" {
-  type        = bool
-  default     = true
-  description = "If true, all conditional access policies will be created in reporting-only mode."
-}
-
 variable "excluded_groups" {
   description = "List of group IDs to exclude from conditional access policies (break glass accounts)"
   type        = list(string)

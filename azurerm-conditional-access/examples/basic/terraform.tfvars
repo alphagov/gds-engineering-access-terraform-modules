@@ -1,5 +1,3 @@
-reporting_only_for_all_policies = true
-
 excluded_groups = [
   "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
   "f9e8d7c6-b5a4-3210-fedc-ba0987654321"

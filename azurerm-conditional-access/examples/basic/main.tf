@@ -22,7 +22,7 @@ module "conditional_access_policies" {
   for_each = local.conditional_access_policies
 
   policy_name                       = each.value.policy_name
-  policy_state                      = var.reporting_only_for_all_policies ? "enabledForReportingButNotEnforced" : "enabled"
+  policy_state                      = lookup(each.value, "policy_state", "enabledForReportingButNotEnforced") # Default to reporting only to reduce risk of lockout due to policy misconfiguration
   client_app_types                  = lookup(each.value, "client_app_types", ["all"])
   included_applications             = lookup(each.value, "included_applications", ["All"])
   excluded_applications             = lookup(each.value, "excluded_applications", [])
