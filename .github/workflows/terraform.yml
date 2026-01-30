@@ -1,4 +1,4 @@
-# To add more modules in the future, simply add them to the filters section
+# To add more modules in the future, simply add them to the filters section (dorny/paths-filter action).
 
 name: Terraform CI
 
@@ -36,6 +36,8 @@ jobs:
           filters: |
             terraform-azurerm-conditional-access:
               - 'terraform-azurerm-conditional-access/**'
+            msgraph-entra-domain:
+              - 'msgraph-entra-domain/**'
 
   module-validation:
     uses: alphagov/gds-github-workflows/.github/workflows/terraform-module-validation.yml@main

@@ -28,11 +28,26 @@ terraform-docs markdown table --indent 2 --output-mode inject --output-file READ
 
 ## Releasing Individual Modules
 
-To release a new version of a specific module, create and push a git tag that matches the module's directory name and desired version. For example, to release version 1.2.3 of the `terraform-azurerm-conditional-access` module:
+To release a new version of a specific module, create and push a git tag matching the module's directory name and desired version. For example, to release version 0.0.1 of the `terraform-azurerm-conditional-access` module, you would run the commands below from the root of the checked out repository:
 
 ```sh
-git tag terraform-azurerm-conditional-access/v1.2.3
-git push origin terraform-azurerm-conditional-access/v1.2.3
+git tag terraform-azurerm-conditional-access/v0.0.1 -m 'Initial release'
+git push origin terraform-azurerm-conditional-access/v0.0.1
 ```
 
 This will trigger the release workflow for that module only. Each module should be tagged and released independently using this pattern.
+
+## Consuming Modules
+
+1. On the [Releases page](https://github.com/alphagov/gds-engineering-access-terraform-modules/releases), find your desired module/version combination, ensure the Assets drop-down list is expanded, then right click the module asset (terraform-azurerm-conditional-access_v0.0.1.zip in this case) and select 'Copy Link':
+
+![assets](./docs/assets.png)
+
+2. Use this URI in the module source argument:
+
+```hcl
+module "terraform-azurerm-conditional-access" {
+  source = "https://github.com/alphagov/gds-engineering-access-terraform-modules/releases/download/terraform-azurerm-conditional-access_v0.0.1/terraform-azurerm-conditional-access_v0.0.1.zip"
+  #...
+}
+```
