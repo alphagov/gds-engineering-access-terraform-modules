@@ -14,8 +14,7 @@ settings:
 formatter: "markdown table"
 
 output:
-  # TODO: Make this support multiple module READMEs
-  file: azurerm-conditional-access/README.md
+  file: README.md
   mode: inject
 
 sections:

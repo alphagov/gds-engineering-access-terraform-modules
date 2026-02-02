@@ -73,19 +73,40 @@ The destruction of the domain can only happen in the following conditions:
 * The domain is **not** in use (meaning there are no users assigned to this domain)
 
 <!-- BEGIN_TF_DOCS -->
+## Requirements
+
+| Name | Version |
+|------|---------|
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.13 |
+| <a name="requirement_msgraph"></a> [msgraph](#requirement\_msgraph) | ~> 0.3 |
+
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_msgraph"></a> [msgraph](#provider\_msgraph) | ~> 0.3 |
+| <a name="provider_msgraph"></a> [msgraph](#provider\_msgraph) | 0.3.0 |
 | <a name="provider_terraform"></a> [terraform](#provider\_terraform) | n/a |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+|------|------|
+| [msgraph_resource.this_domain](https://registry.terraform.io/providers/microsoft/msgraph/latest/docs/resources/resource) | resource |
+| [msgraph_resource_action.domain_verify](https://registry.terraform.io/providers/microsoft/msgraph/latest/docs/resources/resource_action) | resource |
+| [msgraph_resource_action.update_domain](https://registry.terraform.io/providers/microsoft/msgraph/latest/docs/resources/resource_action) | resource |
+| [terraform_data.domain_name](https://registry.terraform.io/providers/hashicorp/terraform/latest/docs/resources/data) | resource |
+| [msgraph_resource.domain_verification_dns_records](https://registry.terraform.io/providers/microsoft/msgraph/latest/docs/data-sources/resource) | data source |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_name"></a> [name](#input\_name) | Fully qualified domain name to add to the Microsoft Entra ID tenancy | `string` | n/a | yes |
 | <a name="input_default"></a> [default](#input\_default) | Whether to set this domain as default for new users. This is the same as making it the Primary domain.<br/>Only a value of 'true' is allowed, since it is not possible to demote a domain. Demotion happens by the virtue of promoting another domain to be the default. | `bool` | `null` | no |
+| <a name="input_name"></a> [name](#input\_name) | Fully qualified domain name to add to the Microsoft Entra ID tenancy | `string` | n/a | yes |
 | <a name="input_verify"></a> [verify](#input\_verify) | Whether to automatically verify the domain (requires DNS verification records to be added) | `bool` | `false` | no |
 
 ## Outputs

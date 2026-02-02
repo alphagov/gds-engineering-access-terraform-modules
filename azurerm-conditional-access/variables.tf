@@ -7,6 +7,10 @@ variable "policy_state" {
   description = "The state of the policy: enabled, disabled, or enabledForReportingButNotEnforced"
   type        = string
   default     = "enabled"
+  validation {
+    condition     = contains(["enabled", "disabled", "enabledForReportingButNotEnforced"], var.policy_state)
+    error_message = "Policy state must be enabled, disabled or enabledForReportingButNotEnforced."
+  }
 }
 
 variable "client_app_types" {

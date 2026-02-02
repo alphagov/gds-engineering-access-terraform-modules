@@ -52,3 +52,4 @@ jobs:
       terraform-version: ${{ vars.TERRAFORM_VERSION }}
       terraform-dir: ${{ matrix.module }}
       enable-commitlint: false
+      enable-terraform-docs: false
