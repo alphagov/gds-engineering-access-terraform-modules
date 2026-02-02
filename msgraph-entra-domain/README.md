@@ -84,7 +84,7 @@ The destruction of the domain can only happen in the following conditions:
 
 | Name | Version |
 |------|---------|
-| <a name="provider_msgraph"></a> [msgraph](#provider\_msgraph) | ~> 0.3 |
+| <a name="provider_msgraph"></a> [msgraph](#provider\_msgraph) | 0.3.0 |
 | <a name="provider_terraform"></a> [terraform](#provider\_terraform) | n/a |
 
 ## Modules
