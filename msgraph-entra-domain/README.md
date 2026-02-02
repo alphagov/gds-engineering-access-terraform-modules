@@ -114,4 +114,5 @@ No modules.
 | Name | Description |
 |------|-------------|
 | <a name="output_domain_verification_dns_records"></a> [domain\_verification\_dns\_records](#output\_domain\_verification\_dns\_records) | DNS records required by Entra for domain verification<br/><br/>The records become available after setting up the domain in Entra.<br/>They remain active until the domain is verified. Afterwards, the records will be emptied out automatically<br/>`terraform plan` will show a diff after verification to clear them<br/>The diff changes have no consequence and can be safely applied |
+| <a name="output_domain_verification_dns_records2"></a> [domain\_verification\_dns\_records2](#output\_domain\_verification\_dns\_records2) | DNS records required by Entra for domain verification<br/><br/>The records become available after setting up the domain in Entra.<br/>They remain active until the domain is verified. Afterwards, the records will be emptied out automatically<br/>`terraform plan` will show a diff after verification to clear them<br/>The diff changes have no consequence and can be safely applied |
 <!-- END_TF_DOCS -->

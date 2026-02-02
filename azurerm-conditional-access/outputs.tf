@@ -12,3 +12,8 @@ output "policy_display_name" {
   description = "The display name of the conditional access policy"
   value       = azuread_conditional_access_policy.policy.display_name
 }
+
+output "policy_display_name2" {
+  description = "The display name of the conditional access policy"
+  value       = azuread_conditional_access_policy.policy.display_name
+}
