@@ -103,4 +103,5 @@ repos:
           - --args=--skip-check "CKV_GHA_7"
       - id: terraform_trivy
         args:
+          - --hook-config=--parallelism-limit=1
           - --args=--skip-dirs="**/.terraform"
