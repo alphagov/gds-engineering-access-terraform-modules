@@ -107,46 +107,60 @@ module "block_legacy_auth" {
 brew install tflint checkov trivy terraform-docs
 ```
 
-> [!IMPORTANT]
-> Make sure the Homebrew path is included in the PATH environment variable in your default shell (probably Zsh on MacOS).
-
-2. Then complete steps 1. and 3. from the [pre-commit quick start](https://pre-commit.com/#quick-start).
+1. Then complete steps 1. and 3. from the [pre-commit quick start](https://pre-commit.com/#quick-start).
 
 If pre-commit detects issues when you attempt to commit changes, a dialogue box similar to the one below will appear. Click 'Show Command Output' to see details:
 
 ![pre-commit](./docs/pre-commit.png)
 
-> [!IMPORTANT]
-> This README was created, and is maintained by the terraform-docs utility. When making terraform changes, please run the following command in the root of the repository before committing them (the terraform-docs 'pre-commit hook' for this [appears to be broken](https://github.com/terraform-docs/terraform-docs/issues/836) at present):
+> [!TIP]
+> You can run terraform docs manually using the following command
 
 ```zsh
-terraform-docs markdown table --indent 2 --output-mode inject --output-file README.md terraform-azurerm-<module name suffix>
+terraform-docs markdown table --indent 2 --output-mode inject --output-file README.md <module name>
 ```
 
 <!-- BEGIN_TF_DOCS -->
+## Requirements
+
+| Name | Version |
+|------|---------|
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.11.0 |
+| <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) | ~> 3.7 |
+
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_azuread"></a> [azuread](#provider\_azuread) | ~> 3.7 |
+| <a name="provider_azuread"></a> [azuread](#provider\_azuread) | 3.7.0 |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+|------|------|
+| [azuread_conditional_access_policy.policy](https://registry.terraform.io/providers/hashicorp/azuread/latest/docs/resources/conditional_access_policy) | resource |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_built_in_controls"></a> [built\_in\_controls](#input\_built\_in\_controls) | List of built-in grant controls (block, mfa, compliantDevice, etc.) | `list(string)` | n/a | yes |
-| <a name="input_excluded_groups"></a> [excluded\_groups](#input\_excluded\_groups) | List of group IDs to exclude from conditional access policies (break glass accounts) | `list(string)` | n/a | yes |
-| <a name="input_policy_name"></a> [policy\_name](#input\_policy\_name) | The display name of the conditional access policy | `string` | n/a | yes |
 | <a name="input_authentication_strength_policy_id"></a> [authentication\_strength\_policy\_id](#input\_authentication\_strength\_policy\_id) | ID of the authentication strength policy to require. Must be a full resource path i.e. /policies/authenticationStrengthPolicies/<UUID>. See https://learn.microsoft.com/en-us/entra/identity/authentication/concept-authentication-strengths#built-in-authentication-strengths. | `string` | `null` | no |
+| <a name="input_built_in_controls"></a> [built\_in\_controls](#input\_built\_in\_controls) | List of built-in grant controls (block, mfa, compliantDevice, etc.) | `list(string)` | n/a | yes |
 | <a name="input_client_app_types"></a> [client\_app\_types](#input\_client\_app\_types) | List of client app types to include | `list(string)` | <pre>[<br/>  "all"<br/>]</pre> | no |
 | <a name="input_exclude_guests"></a> [exclude\_guests](#input\_exclude\_guests) | Whether to exclude guests and external users | `bool` | `false` | no |
 | <a name="input_excluded_applications"></a> [excluded\_applications](#input\_excluded\_applications) | List of application IDs to exclude | `list(string)` | `[]` | no |
+| <a name="input_excluded_groups"></a> [excluded\_groups](#input\_excluded\_groups) | List of group IDs to exclude from conditional access policies (break glass accounts) | `list(string)` | n/a | yes |
 | <a name="input_excluded_locations"></a> [excluded\_locations](#input\_excluded\_locations) | List of location names to exclude | `list(string)` | `[]` | no |
 | <a name="input_grant_operator"></a> [grant\_operator](#input\_grant\_operator) | Grant controls operator: OR or AND | `string` | `"OR"` | no |
 | <a name="input_included_applications"></a> [included\_applications](#input\_included\_applications) | List of application IDs to include | `list(string)` | <pre>[<br/>  "All"<br/>]</pre> | no |
 | <a name="input_included_locations"></a> [included\_locations](#input\_included\_locations) | List of location names to include | `list(string)` | `[]` | no |
 | <a name="input_included_user_actions"></a> [included\_user\_actions](#input\_included\_user\_actions) | List of user actions to include | `list(string)` | `null` | no |
 | <a name="input_included_users"></a> [included\_users](#input\_included\_users) | List of user IDs or groups to include | `list(string)` | <pre>[<br/>  "All"<br/>]</pre> | no |
+| <a name="input_policy_name"></a> [policy\_name](#input\_policy\_name) | The display name of the conditional access policy | `string` | n/a | yes |
 | <a name="input_policy_state"></a> [policy\_state](#input\_policy\_state) | The state of the policy: enabled, disabled, or enabledForReportingButNotEnforced | `string` | `"enabled"` | no |
 | <a name="input_sign_in_frequency_enabled"></a> [sign\_in\_frequency\_enabled](#input\_sign\_in\_frequency\_enabled) | Whether to enable sign-in frequency session control | `bool` | `false` | no |
 | <a name="input_sign_in_frequency_interval"></a> [sign\_in\_frequency\_interval](#input\_sign\_in\_frequency\_interval) | Sign-in frequency interval | `string` | `"everyTime"` | no |
