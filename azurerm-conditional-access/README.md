@@ -114,7 +114,7 @@ If pre-commit detects issues when you attempt to commit changes, a dialogue box 
 ![pre-commit](./docs/pre-commit.png)
 
 > [!TIP]
-> You can run terraform docs manually using the following command
+> terraform-docs can be executed manually for troubleshooting etc. using the following command:
 
 ```zsh
 terraform-docs markdown table --indent 2 --output-mode inject --output-file README.md <module name>
