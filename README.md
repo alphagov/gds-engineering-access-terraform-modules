@@ -10,12 +10,10 @@ Repo where we store reusable terraform modules for the gds-entra solution.
 brew install tflint checkov trivy terraform-docs codespell
 ```
 
-> [!IMPORTANT]
-> Make sure the Homebrew path is included in the PATH environment variable in your default shell (probably Zsh on MacOS).
-
 2. Then complete steps 1. and 3. from the [pre-commit quick start](https://pre-commit.com/#quick-start).
 
-If pre-commit detects issues when you attempt to commit changes, a dialogue box similar to the one below will appear. Click 'Show Command Output' to see details:
+> [!IMPORTANT]
+> If pre-commit detects issues when you attempt to commit changes, a dialogue box similar to the one below will appear. Click 'Show Command Output' to see details:
 
 ![pre-commit](./docs/pre-commit.png)
 
@@ -23,7 +21,7 @@ If pre-commit detects issues when you attempt to commit changes, a dialogue box 
 > README.md files for each module were created, and are maintained by terraform-docs. A pre-commit hook is configured to run this utility automatically; you can also run it manually as shown below:
 
 ```zsh
-terraform-docs markdown table --indent 2 --output-mode inject --output-file README.md ./terraform-azurerm-<module name suffix>
+terraform-docs markdown table --indent 2 --output-mode inject --output-file README.md <module name>
 ```
 
 ## Creating New Modules
@@ -55,6 +53,8 @@ Please update the following filters when introducing a new module directory, if 
 ```
 
 ## Releasing Individual Modules
+
+First determine the next version to [release](https://github.com/alphagov/gds-engineering-access-terraform-modules/releases)
 
 To release a new version of a specific module, create and push a git tag matching the module's directory name and desired version. For example, to release version 0.0.1 of the `azurerm-conditional-access` module, you would run the commands below from the root of the checked out repository:
 
