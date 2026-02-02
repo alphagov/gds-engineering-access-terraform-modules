@@ -40,7 +40,7 @@ jobs:
               - 'msgraph-entra-domain/**'
 
   module-validation:
-    uses: alphagov/gds-github-workflows/.github/workflows/terraform-module-validation.yml@main
+    uses: alphagov/gds-github-workflows/.github/workflows/terraform-module-validation.yml@feat/toggle-terraform-docs
     name: Module Validation
     needs: [pre-commit-checks, detect-changes]
     if: needs.detect-changes.outputs.modules != '[]'
@@ -52,3 +52,4 @@ jobs:
       terraform-version: ${{ vars.TERRAFORM_VERSION }}
       terraform-dir: ${{ matrix.module }}
       enable-commitlint: false
+      enable-terraform-docs: false
