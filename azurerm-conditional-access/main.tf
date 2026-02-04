@@ -1,3 +1,7 @@
+locals {
+  is_time_based_sign_in_frequency = var.sign_in_frequency_interval == "timeBased"
+}
+
 resource "azuread_conditional_access_policy" "policy" {
   display_name = var.policy_name
   state        = var.policy_state
@@ -35,9 +39,11 @@ resource "azuread_conditional_access_policy" "policy" {
   }
 
   dynamic "session_controls" {
-    for_each = var.sign_in_frequency_enabled ? [1] : []
+    for_each = var.sign_in_frequency_interval != null ? [1] : []
     content {
+      sign_in_frequency          = local.is_time_based_sign_in_frequency ? var.sign_in_frequency : null
       sign_in_frequency_interval = var.sign_in_frequency_interval
+      sign_in_frequency_period   = local.is_time_based_sign_in_frequency ? var.sign_in_frequency_period : null
     }
   }
 }

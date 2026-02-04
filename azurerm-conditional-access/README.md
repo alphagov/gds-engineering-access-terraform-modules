@@ -162,8 +162,9 @@ No modules.
 | <a name="input_included_users"></a> [included\_users](#input\_included\_users) | List of user IDs or groups to include | `list(string)` | <pre>[<br/>  "All"<br/>]</pre> | no |
 | <a name="input_policy_name"></a> [policy\_name](#input\_policy\_name) | The display name of the conditional access policy | `string` | n/a | yes |
 | <a name="input_policy_state"></a> [policy\_state](#input\_policy\_state) | The state of the policy: enabled, disabled, or enabledForReportingButNotEnforced | `string` | `"enabled"` | no |
-| <a name="input_sign_in_frequency_enabled"></a> [sign\_in\_frequency\_enabled](#input\_sign\_in\_frequency\_enabled) | Whether to enable sign-in frequency session control | `bool` | `false` | no |
-| <a name="input_sign_in_frequency_interval"></a> [sign\_in\_frequency\_interval](#input\_sign\_in\_frequency\_interval) | Sign-in frequency interval | `string` | `"everyTime"` | no |
+| <a name="input_sign_in_frequency"></a> [sign\_in\_frequency](#input\_sign\_in\_frequency) | Number of days or hours to enforce sign-in frequency. Required when sign\_in\_frequency\_interval is 'timeBased'. | `number` | `null` | no |
+| <a name="input_sign_in_frequency_interval"></a> [sign\_in\_frequency\_interval](#input\_sign\_in\_frequency\_interval) | The interval to apply to sign-in frequency control. | `string` | `null` | no |
+| <a name="input_sign_in_frequency_period"></a> [sign\_in\_frequency\_period](#input\_sign\_in\_frequency\_period) | The time period to enforce sign-in frequency. Required when sign\_in\_frequency\_interval is 'timeBased'. | `string` | `null` | no |
 | <a name="input_sign_in_risk_levels"></a> [sign\_in\_risk\_levels](#input\_sign\_in\_risk\_levels) | List of sign-in risk levels to trigger the policy | `list(string)` | `[]` | no |
 
 ## Outputs
