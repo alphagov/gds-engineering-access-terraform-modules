@@ -53,11 +53,11 @@ This will trigger the release workflow for that module only. Each module should 
 
 1. On the [Releases page](https://github.com/alphagov/gds-engineering-access-terraform-modules/releases), find your desired module/version combination and click on the short commit SHA hash:
 
-![assets](./docs/assets.png)
+![assets](./assets/releases.png)
 
 2. On the commit page, click the copy button to retrieve the full commit SHA hash:
 
-![assets](./docs/sha.png)
+![assets](./assets/sha.png)
 
 3. Reference the module in the source argument of your module block. Add a comment to indicate the release version this commit SHA represents:
 
