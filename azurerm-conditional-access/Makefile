@@ -12,7 +12,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-.PHONY: all security lint format documentation documentation-examples validate-all validate validate-examples init examples tests
+.PHONY: all security lint format validate-all validate validate-examples init examples tests
 
 default: all
 
@@ -23,7 +23,6 @@ all:
 	$(MAKE) lint
 	$(MAKE) security
 	$(MAKE) format
-	$(MAKE) documentation
 
 examples:
 	$(MAKE) validate-examples
@@ -32,27 +31,6 @@ examples:
 	$(MAKE) lint
 	$(MAKE) security
 	$(MAKE) format
-	$(MAKE) documentation
-
-documentation:
-	@echo "--> Generating documentation"
-	@terraform-docs .
-	$(MAKE) documentation-modules
-	$(MAKE) documentation-examples
-
-documentation-modules:
-	@echo "--> Generating documentation for modules"
-	@find . -type d -regex '.*/modules/[a-za-z\-_$$]*' -not -path '*.terraform*' 2>/dev/null | while read -r dir; do \
-		echo "--> Generating documentation for module: $$dir"; \
-		terraform-docs $$dir; \
-	done;
-
-documentation-examples:
-	@echo "--> Generating documentation for examples"
-	@find . -type d -path '*/examples/*' -not -path '*.terraform*' 2>/dev/null| while read -r dir; do \
-		echo "--> Generating documentation for example: $$dir"; \
-		terraform-docs $$dir; \
-	done;
 
 upgrade-terraform-providers:
 	@printf "%s Upgrading Terraform providers for %-24s" "-->" "."
