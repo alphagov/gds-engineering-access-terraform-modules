@@ -77,10 +77,10 @@ repos:
           - --args=-write=true
 
       - id: terraform_docs
+        files: \.tf$
+        exclude: ^(\..*/|assets/)
         args:
-          - --hook-config=--add-to-existing-output-files=true
-          - --hook-config=--output-mode=inject
-          - --hook-config=--config=.terraform-docs.yml
+          - --args=--config=.terraform-docs.yml
 
       - id: terraform_validate
         name: Terraform validate examples
