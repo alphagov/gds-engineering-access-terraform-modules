@@ -1,5 +1,5 @@
 locals {
-  is_time_based_sign_in_frequency = var.sign_in_frequency_interval == "timeBased" ? true : false
+  is_time_based_sign_in_frequency = var.sign_in_frequency_interval == "timeBased"
 }
 
 resource "azuread_conditional_access_policy" "policy" {
