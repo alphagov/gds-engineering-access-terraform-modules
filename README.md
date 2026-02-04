@@ -25,21 +25,6 @@ All terraform modules live in the root of the repository.
 Create a new folder for your terraform module, using the following naming convention:
 `<resource_type>-<module_name>`.
 
-Please update the following filters when introducing a new module directory:
-
-```hcl
-# .github/workflows/terraform.yml
-
-      - uses: dorny/paths-filter@de90cc6fb38fc0963ad72b210f1f284cd68cea36 # v3.0.2
-        id: filter
-        with:
-          filters: |
-            azurerm-conditional-access:
-              - 'azurerm-conditional-access/**'
-            msgraph-entra-domain:
-              - 'msgraph-entra-domain/**'
-```
-
 ## Generating documentation for the modules
 
 A `README.md` file must be created on each module directory.
