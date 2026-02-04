@@ -10,7 +10,7 @@ variable "policy_state" {
 
   validation {
     condition     = contains(["enabled", "disabled", "enabledForReportingButNotEnforced"], var.policy_state)
-    error_message = "policy_state must be enabled, disabled or enabledForReportingButNotEnforced."
+    error_message = "Policy state must be enabled, disabled or enabledForReportingButNotEnforced."
   }
 }
 
