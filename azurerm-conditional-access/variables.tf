@@ -114,10 +114,10 @@ variable "sign_in_frequency" {
 variable "sign_in_frequency_interval" {
   description = "The interval to apply to sign-in frequency control."
   type        = string
-  default     = "timeBased"
+  default     = null
 
   validation {
-    condition     = contains(["timeBased", "everyTime"], var.sign_in_frequency_interval)
+    condition     = var.sign_in_frequency_interval == null || contains(["timeBased", "everyTime"], var.sign_in_frequency_interval)
     error_message = "sign_in_frequency_interval must be timeBased or everyTime."
   }
 }
