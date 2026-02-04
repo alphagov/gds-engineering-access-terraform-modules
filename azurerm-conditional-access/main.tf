@@ -35,9 +35,11 @@ resource "azuread_conditional_access_policy" "policy" {
   }
 
   dynamic "session_controls" {
-    for_each = var.sign_in_frequency_enabled ? [1] : []
+    for_each = var.sign_in_frequency_interval != null ? [1] : []
     content {
+      sign_in_frequency          = var.sign_in_frequency_interval == "timeBased" ? var.sign_in_frequency : null
       sign_in_frequency_interval = var.sign_in_frequency_interval
+      sign_in_frequency_period   = var.sign_in_frequency_interval == "timeBased" ? var.sign_in_frequency_period : null
     }
   }
 }

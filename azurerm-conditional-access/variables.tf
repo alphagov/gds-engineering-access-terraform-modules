@@ -7,9 +7,10 @@ variable "policy_state" {
   description = "The state of the policy: enabled, disabled, or enabledForReportingButNotEnforced"
   type        = string
   default     = "enabled"
+
   validation {
     condition     = contains(["enabled", "disabled", "enabledForReportingButNotEnforced"], var.policy_state)
-    error_message = "Policy state must be enabled, disabled or enabledForReportingButNotEnforced."
+    error_message = "policy_state must be enabled, disabled or enabledForReportingButNotEnforced."
   }
 }
 
@@ -104,14 +105,30 @@ variable "sign_in_risk_levels" {
   default     = []
 }
 
-variable "sign_in_frequency_enabled" {
-  description = "Whether to enable sign-in frequency session control"
-  type        = bool
-  default     = false
+variable "sign_in_frequency" {
+  description = "Number of days or hours to enforce sign-in frequency. Required when sign_in_frequency_interval is 'timeBased'."
+  type        = number
+  default     = null
 }
 
 variable "sign_in_frequency_interval" {
-  description = "Sign-in frequency interval"
+  description = "The interval to apply to sign-in frequency control."
   type        = string
-  default     = "everyTime"
+  default     = "timeBased"
+
+  validation {
+    condition     = contains(["timeBased", "everyTime"], var.sign_in_frequency_interval)
+    error_message = "sign_in_frequency_interval must be timeBased or everyTime."
+  }
+}
+
+variable "sign_in_frequency_period" {
+  description = "The time period to enforce sign-in frequency. Required when sign_in_frequency_interval is 'timeBased'."
+  type        = string
+  default     = null
+
+  validation {
+    condition     = var.sign_in_frequency_period == null || contains(["days", "hours"], var.sign_in_frequency_period)
+    error_message = "sign_in_frequency_period must be days or hours."
+  }
 }
