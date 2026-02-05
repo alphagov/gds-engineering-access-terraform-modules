@@ -33,6 +33,7 @@ resource "azuread_conditional_access_policy" "policy" {
 
     sign_in_risk_levels = length(var.sign_in_risk_levels) > 0 ? var.sign_in_risk_levels : null
     user_risk_levels    = length(var.user_risk_levels) > 0 ? var.user_risk_levels : null
+    insider_risk_levels = var.insider_risk_levels
   }
 
   grant_controls {

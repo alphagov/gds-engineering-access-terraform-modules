@@ -141,6 +141,20 @@ variable "user_risk_levels" {
   }
 }
 
+variable "insider_risk_levels" {
+  description = "The insider risk level to trigger the policy. This feature requires Microsoft Entra Insider Risk Management."
+  type        = string
+  default     = null
+
+  validation {
+    condition = var.insider_risk_levels == null || contains(
+      ["minor", "moderate", "elevated", "unknownFutureValue"],
+      var.insider_risk_levels
+    )
+    error_message = "insider_risk_levels must be one of: minor, moderate, elevated, unknownFutureValue."
+  }
+}
+
 variable "sign_in_frequency" {
   description = "Number of days or hours to enforce sign-in frequency. Required when sign_in_frequency_interval is 'timeBased'."
   type        = number
