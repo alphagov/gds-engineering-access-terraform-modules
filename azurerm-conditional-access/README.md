@@ -148,6 +148,7 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_authentication_flow_transfer_methods"></a> [authentication\_flow\_transfer\_methods](#input\_authentication\_flow\_transfer\_methods) | A list of authentication flow transfer methods included in the policy | `list(string)` | `[]` | no |
 | <a name="input_authentication_strength_policy_id"></a> [authentication\_strength\_policy\_id](#input\_authentication\_strength\_policy\_id) | ID of the authentication strength policy to require. Must be a full resource path i.e. /policies/authenticationStrengthPolicies/<UUID>. See https://learn.microsoft.com/en-us/entra/identity/authentication/concept-authentication-strengths#built-in-authentication-strengths. | `string` | `null` | no |
 | <a name="input_built_in_controls"></a> [built\_in\_controls](#input\_built\_in\_controls) | List of built-in grant controls (block, mfa, compliantDevice, etc.) | `list(string)` | n/a | yes |
 | <a name="input_client_app_types"></a> [client\_app\_types](#input\_client\_app\_types) | List of client app types to include | `list(string)` | <pre>[<br/>  "all"<br/>]</pre> | no |
