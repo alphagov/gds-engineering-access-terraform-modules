@@ -155,6 +155,7 @@ terraform-docs markdown table --indent 2 --output-mode inject --output-file READ
 | Name | Description |
 |------|-------------|
 | <a name="output_policy_display_name"></a> [policy\_display\_name](#output\_policy\_display\_name) | The display name of the conditional access policy |
+| <a name="output_policy_display_name2"></a> [policy\_display\_name2](#output\_policy\_display\_name2) | The display name of the conditional access policy |
 | <a name="output_policy_id"></a> [policy\_id](#output\_policy\_id) | The ID of the conditional access policy |
 | <a name="output_policy_object_id"></a> [policy\_object\_id](#output\_policy\_object\_id) | The object ID of the conditional access policy |
 <!-- END_TF_DOCS -->
