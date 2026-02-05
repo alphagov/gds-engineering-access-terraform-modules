@@ -117,6 +117,28 @@ variable "sign_in_risk_levels" {
   description = "List of sign-in risk levels to trigger the policy"
   type        = list(string)
   default     = []
+
+  validation {
+    condition = alltrue([
+      for level in var.sign_in_risk_levels :
+      contains(["low", "medium", "high", "hidden", "none", "unknownFutureValue"], level)
+    ])
+    error_message = "sign_in_risk_levels must contain only: low, medium, high, hidden, none, unknownFutureValue."
+  }
+}
+
+variable "user_risk_levels" {
+  description = "List of user risk levels to trigger the policy"
+  type        = list(string)
+  default     = []
+
+  validation {
+    condition = alltrue([
+      for level in var.user_risk_levels :
+      contains(["low", "medium", "high", "hidden", "none", "unknownFutureValue"], level)
+    ])
+    error_message = "user_risk_levels must contain only: low, medium, high, hidden, none, unknownFutureValue."
+  }
 }
 
 variable "sign_in_frequency" {

@@ -21,22 +21,23 @@ module "conditional_access_policies" {
   source   = "../../"
   for_each = local.conditional_access_policies
 
-  policy_name                       = each.value.policy_name
-  policy_state                      = lookup(each.value, "policy_state", "enabledForReportingButNotEnforced") # Default to reporting only to reduce risk of lockout due to policy misconfiguration
-  client_app_types                  = lookup(each.value, "client_app_types", ["all"])
-  included_applications             = lookup(each.value, "included_applications", ["All"])
-  excluded_applications             = lookup(each.value, "excluded_applications", [])
-  included_user_actions             = lookup(each.value, "included_user_actions", null)
-  included_locations                = lookup(each.value, "included_locations", [])
-  excluded_locations                = lookup(each.value, "excluded_locations", [])
-  included_users                    = lookup(each.value, "included_users", ["All"])
-  excluded_groups                   = each.value["excluded_groups"]
-  exclude_guests                    = lookup(each.value, "exclude_guests", false)
-  grant_operator                    = lookup(each.value, "grant_operator", "OR")
-  built_in_controls                 = lookup(each.value, "built_in_controls", null)
-  authentication_strength_policy_id = lookup(each.value, "authentication_strength_policy_id", null)
-  sign_in_risk_levels               = lookup(each.value, "sign_in_risk_levels", [])
-  sign_in_frequency_enabled         = lookup(each.value, "sign_in_frequency_enabled", false)
+  policy_name                          = each.value.policy_name
+  policy_state                         = lookup(each.value, "policy_state", "enabledForReportingButNotEnforced") # Default to reporting only to reduce risk of lockout due to policy misconfiguration
+  client_app_types                     = lookup(each.value, "client_app_types", ["all"])
+  authentication_flow_transfer_methods = lookup(each.value, "authentication_flow_transfer_methods", [])
+  included_applications                = lookup(each.value, "included_applications", ["All"])
+  excluded_applications                = lookup(each.value, "excluded_applications", [])
+  included_user_actions                = lookup(each.value, "included_user_actions", null)
+  included_locations                   = lookup(each.value, "included_locations", [])
+  excluded_locations                   = lookup(each.value, "excluded_locations", [])
+  included_users                       = lookup(each.value, "included_users", ["All"])
+  excluded_groups                      = each.value["excluded_groups"]
+  exclude_guests                       = lookup(each.value, "exclude_guests", false)
+  grant_operator                       = lookup(each.value, "grant_operator", "OR")
+  built_in_controls                    = lookup(each.value, "built_in_controls", [])
+  authentication_strength_policy_id    = lookup(each.value, "authentication_strength_policy_id", null)
+  sign_in_risk_levels                  = lookup(each.value, "sign_in_risk_levels", [])
+  user_risk_levels                     = lookup(each.value, "user_risk_levels", [])
 
   # All policies depend on named locations being created first
   depends_on = [azuread_named_location.trusted_locations]
