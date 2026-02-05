@@ -20,6 +20,20 @@ variable "client_app_types" {
   default     = ["all"]
 }
 
+variable "authentication_flow_transfer_methods" {
+  description = "A list of authentication flow transfer methods included in the policy"
+  type        = list(string)
+  default     = []
+
+  validation {
+    condition = alltrue([
+      for transfer_method in var.authentication_flow_transfer_methods :
+      contains(["authenticationTransfer", "deviceCodeFlow"], transfer_method)
+    ])
+    error_message = "authentication_flow_transfer_methods must contain only: authenticationTransfer, deviceCodeFlow."
+  }
+}
+
 variable "included_applications" {
   description = "List of application IDs to include"
   type        = list(string)

@@ -9,6 +9,8 @@ resource "azuread_conditional_access_policy" "policy" {
   conditions {
     client_app_types = var.client_app_types
 
+    authentication_flow_transfer_methods = length(var.authentication_flow_transfer_methods) > 0 ? var.authentication_flow_transfer_methods : null
+
     applications {
       included_user_actions = try(length(var.included_user_actions) > 0, false) ? var.included_user_actions : null
       included_applications = try(length(var.included_user_actions) > 0, false) ? null : var.included_applications
