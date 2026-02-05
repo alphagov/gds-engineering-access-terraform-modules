@@ -2,16 +2,14 @@ locals {
   # Conditional access policy configurations
   conditional_access_policies = {
     require_mfa = {
-      policy_name               = "CA01 - All Users: Require MFA"
-      client_app_types          = ["all"]
-      included_applications     = ["All"]
-      excluded_applications     = []
-      included_users            = ["All"]
-      excluded_groups           = data.azuread_groups.break_glass_groups.object_ids
-      built_in_controls         = ["mfa"]
-      sign_in_frequency_enabled = true
-      depends_on_locations      = false
-      policy_state              = "enabledForReportingButNotEnforced"
+      policy_name           = "CA01 - All Users: Require MFA"
+      client_app_types      = ["all"]
+      included_applications = ["All"]
+      excluded_applications = []
+      included_users        = ["All"]
+      excluded_groups       = data.azuread_groups.break_glass_groups.object_ids
+      built_in_controls     = ["mfa"]
+      policy_state          = "enabledForReportingButNotEnforced"
     }
 
     network_block = {
@@ -24,7 +22,6 @@ locals {
       included_users        = ["All"]
       excluded_groups       = data.azuread_groups.break_glass_groups.object_ids
       built_in_controls     = ["block"]
-      depends_on_locations  = true
       policy_state          = "enabledForReportingButNotEnforced"
     }
 
@@ -36,7 +33,6 @@ locals {
       included_users        = ["All"]
       excluded_groups       = data.azuread_groups.break_glass_groups.object_ids
       built_in_controls     = ["block"]
-      depends_on_locations  = false
       policy_state          = "enabledForReportingButNotEnforced"
     }
 
@@ -52,20 +48,19 @@ locals {
       excluded_groups       = data.azuread_groups.break_glass_groups.object_ids
       exclude_guests        = true
       built_in_controls     = ["mfa"]
-      depends_on_locations  = true
       policy_state          = "enabledForReportingButNotEnforced"
     }
 
     restrict_device_code_flow = {
-      policy_name           = "CA05 - All Users: Restrict Device Code Flow and Authentication Transfer"
-      client_app_types      = ["all"]
-      included_applications = ["All"]
-      excluded_applications = []
-      included_users        = ["All"]
-      excluded_groups       = data.azuread_groups.break_glass_groups.object_ids
-      built_in_controls     = ["block"]
-      depends_on_locations  = false
-      policy_state          = "enabledForReportingButNotEnforced"
+      policy_name                          = "CA05 - All Users: Restrict Device Code Flow and Authentication Transfer"
+      client_app_types                     = ["all"]
+      included_applications                = ["All"]
+      excluded_applications                = []
+      included_users                       = ["All"]
+      excluded_groups                      = data.azuread_groups.break_glass_groups.object_ids
+      authentication_flow_transfer_methods = ["deviceCodeFlow", "authenticationTransfer"]
+      built_in_controls                    = ["block"]
+      policy_state                         = "enabledForReportingButNotEnforced"
     }
 
     phishing_resistant_mfa = {
@@ -81,7 +76,7 @@ locals {
     }
 
     passwordless_mfa = {
-      policy_name                       = "CA - Require Passwordless MFA"
+      policy_name                       = "CA07 - Require Passwordless MFA"
       client_app_types                  = ["all"]
       included_applications             = ["All"]
       excluded_applications             = []
@@ -90,6 +85,31 @@ locals {
       grant_operator                    = "AND"
       authentication_strength_policy_id = "/policies/authenticationStrengthPolicies/<policy GUID>" # Look up Passwordless MFA strength policy GUID: https://learn.microsoft.com/en-us/entra/identity/authentication/concept-authentication-strengths#built-in-authentication-strengths
       policy_state                      = "enabledForReportingButNotEnforced"
+    }
+
+    high_sign_in_risk_require_mfa = {
+      policy_name           = "CA08 - All Users: Require MFA for High Sign-In Risk"
+      client_app_types      = ["all"]
+      included_applications = ["All"]
+      excluded_applications = []
+      included_users        = ["All"]
+      excluded_groups       = data.azuread_groups.break_glass_groups.object_ids
+      sign_in_risk_levels   = ["high", "medium"]
+      built_in_controls     = ["mfa"]
+      policy_state          = "enabledForReportingButNotEnforced"
+    }
+
+    high_user_risk_require_password_change = {
+      policy_name           = "CA09 - All Users: Require Password Change for High User Risk"
+      client_app_types      = ["all"]
+      included_applications = ["All"]
+      excluded_applications = []
+      included_users        = ["All"]
+      excluded_groups       = data.azuread_groups.break_glass_groups.object_ids
+      user_risk_levels      = ["high", "medium"]
+      grant_operator        = "AND"
+      built_in_controls     = ["mfa", "passwordChange"]
+      policy_state          = "enabledForReportingButNotEnforced"
     }
   }
 }
