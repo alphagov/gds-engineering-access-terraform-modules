@@ -64,7 +64,7 @@ locals {
     }
 
     phishing_resistant_mfa = {
-      policy_name                       = "CA06 - Require Phishing-Resistant MFA for Admins"
+      policy_name                       = "CA - Require Phishing-Resistant MFA for Admins"
       client_app_types                  = ["all"]
       included_applications             = ["All"]
       excluded_applications             = []
