@@ -90,8 +90,9 @@ variable "exclude_guests" {
 }
 
 variable "built_in_controls" {
-  description = "List of built-in grant controls (block, mfa, compliantDevice, etc.)"
+  description = "List of built-in grant controls (block, mfa, compliantDevice, etc.). Cannot be used together with authentication_strength_policy_id."
   type        = list(string)
+  default     = null
 }
 
 variable "authentication_strength_policy_id" {

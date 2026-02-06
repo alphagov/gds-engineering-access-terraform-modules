@@ -6,6 +6,13 @@ resource "azuread_conditional_access_policy" "policy" {
   display_name = var.policy_name
   state        = var.policy_state
 
+  lifecycle {
+    precondition {
+      condition     = (var.built_in_controls != null) != (var.authentication_strength_policy_id != null)
+      error_message = "Exactly one of built_in_controls or authentication_strength_policy_id must be specified, not both or neither."
+    }
+  }
+
   conditions {
     client_app_types = var.client_app_types
 
