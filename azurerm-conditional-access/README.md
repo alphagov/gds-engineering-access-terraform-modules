@@ -126,13 +126,13 @@ terraform-docs markdown table --indent 2 --output-mode inject --output-file READ
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.11.0 |
-| <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) | ~> 3.7 |
+| <a name="requirement_msgraph"></a> [msgraph](#requirement\_msgraph) | ~> 0.3 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_azuread"></a> [azuread](#provider\_azuread) | 3.7.0 |
+| <a name="provider_msgraph"></a> [msgraph](#provider\_msgraph) | 0.3.0 |
 
 ## Modules
 
@@ -142,7 +142,7 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [azuread_conditional_access_policy.policy](https://registry.terraform.io/providers/hashicorp/azuread/latest/docs/resources/conditional_access_policy) | resource |
+| [msgraph_resource.policy](https://registry.terraform.io/providers/microsoft/msgraph/latest/docs/resources/resource) | resource |
 
 ## Inputs
 
@@ -159,6 +159,7 @@ No modules.
 | <a name="input_excluded_platforms"></a> [excluded\_platforms](#input\_excluded\_platforms) | List of platforms to exclude from the policy | `list(string)` | `null` | no |
 | <a name="input_grant_operator"></a> [grant\_operator](#input\_grant\_operator) | Grant controls operator: OR or AND | `string` | `"OR"` | no |
 | <a name="input_included_applications"></a> [included\_applications](#input\_included\_applications) | List of application IDs to include | `list(string)` | <pre>[<br/>  "All"<br/>]</pre> | no |
+| <a name="input_included_authentication_context_class_references"></a> [included\_authentication\_context\_class\_references](#input\_included\_authentication\_context\_class\_references) | List of authentication context class reference IDs to include (c1 through c25). Used to enforce step-up authentication for specific scenarios. | `list(string)` | `[]` | no |
 | <a name="input_included_locations"></a> [included\_locations](#input\_included\_locations) | List of location names to include | `list(string)` | `[]` | no |
 | <a name="input_included_platforms"></a> [included\_platforms](#input\_included\_platforms) | List of platforms to include in the policy. Required when using platform conditions. | `list(string)` | `null` | no |
 | <a name="input_included_user_actions"></a> [included\_user\_actions](#input\_included\_user\_actions) | List of user actions to include | `list(string)` | `null` | no |
@@ -179,4 +180,5 @@ No modules.
 | <a name="output_policy_display_name"></a> [policy\_display\_name](#output\_policy\_display\_name) | The display name of the conditional access policy |
 | <a name="output_policy_id"></a> [policy\_id](#output\_policy\_id) | The ID of the conditional access policy |
 | <a name="output_policy_object_id"></a> [policy\_object\_id](#output\_policy\_object\_id) | The object ID of the conditional access policy |
+| <a name="output_policy_resource_url"></a> [policy\_resource\_url](#output\_policy\_resource\_url) | The full URL path to this policy resource |
 <!-- END_TF_DOCS -->
