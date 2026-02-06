@@ -26,7 +26,7 @@ variable "authentication_flow_transfer_methods" {
   default     = []
 
   validation {
-    condition = alltrue([
+    condition = var.authentication_flow_transfer_methods == null || alltrue([
       for transfer_method in var.authentication_flow_transfer_methods :
       contains(["authenticationTransfer", "deviceCodeFlow"], transfer_method)
     ])
