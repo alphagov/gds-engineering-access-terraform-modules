@@ -2,7 +2,7 @@ locals {
   is_time_based_sign_in_frequency = var.sign_in_frequency_interval == "timeBased"
 
   # Determine which application condition type to use (mutually exclusive)
-  use_user_actions = try(length(var.included_user_actions) > 0, false)
+  use_user_actions = var.included_user_actions != null && length(var.included_user_actions) > 0
   use_auth_context = length(var.included_authentication_context_class_references) > 0
   use_applications = !local.use_user_actions && !local.use_auth_context
 
