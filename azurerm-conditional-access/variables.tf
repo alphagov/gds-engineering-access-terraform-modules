@@ -211,3 +211,17 @@ variable "excluded_platforms" {
     error_message = "excluded_platforms must contain only: all, android, iOS, linux, macOS, windows, windowsPhone, unknownFutureValue."
   }
 }
+
+variable "included_authentication_context_class_references" {
+  description = "List of authentication context class reference IDs to include (c1 through c25). Used to enforce step-up authentication for specific scenarios."
+  type        = list(string)
+  default     = []
+
+  validation {
+    condition = alltrue([
+      for ref in var.included_authentication_context_class_references :
+      can(regex("^c([1-9]|1[0-9]|2[0-5])$", ref))
+    ])
+    error_message = "included_authentication_context_class_references must contain only values c1 through c25."
+  }
+}
