@@ -26,7 +26,7 @@ variable "authentication_flow_transfer_methods" {
   default     = []
 
   validation {
-    condition = alltrue([
+    condition = var.authentication_flow_transfer_methods == null || alltrue([
       for transfer_method in var.authentication_flow_transfer_methods :
       contains(["authenticationTransfer", "deviceCodeFlow"], transfer_method)
     ])
@@ -181,5 +181,33 @@ variable "sign_in_frequency_period" {
   validation {
     condition     = var.sign_in_frequency_period == null || contains(["days", "hours"], var.sign_in_frequency_period)
     error_message = "sign_in_frequency_period must be days or hours."
+  }
+}
+
+variable "included_platforms" {
+  description = "List of platforms to include in the policy. Required when using platform conditions."
+  type        = list(string)
+  default     = null
+
+  validation {
+    condition = var.included_platforms == null || alltrue([
+      for platform in var.included_platforms :
+      contains(["all", "android", "iOS", "linux", "macOS", "windows", "windowsPhone", "unknownFutureValue"], platform)
+    ])
+    error_message = "included_platforms must contain only: all, android, iOS, linux, macOS, windows, windowsPhone, unknownFutureValue."
+  }
+}
+
+variable "excluded_platforms" {
+  description = "List of platforms to exclude from the policy"
+  type        = list(string)
+  default     = null
+
+  validation {
+    condition = var.excluded_platforms == null || alltrue([
+      for platform in var.excluded_platforms :
+      contains(["all", "android", "iOS", "linux", "macOS", "windows", "windowsPhone", "unknownFutureValue"], platform)
+    ])
+    error_message = "excluded_platforms must contain only: all, android, iOS, linux, macOS, windows, windowsPhone, unknownFutureValue."
   }
 }

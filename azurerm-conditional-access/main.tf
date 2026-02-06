@@ -41,6 +41,14 @@ resource "azuread_conditional_access_policy" "policy" {
     sign_in_risk_levels = length(var.sign_in_risk_levels) > 0 ? var.sign_in_risk_levels : null
     user_risk_levels    = length(var.user_risk_levels) > 0 ? var.user_risk_levels : null
     insider_risk_levels = var.insider_risk_levels
+
+    dynamic "platforms" {
+      for_each = var.included_platforms != null ? [1] : []
+      content {
+        included_platforms = var.included_platforms
+        excluded_platforms = var.excluded_platforms
+      }
+    }
   }
 
   grant_controls {

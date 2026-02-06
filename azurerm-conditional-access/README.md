@@ -156,9 +156,11 @@ No modules.
 | <a name="input_excluded_applications"></a> [excluded\_applications](#input\_excluded\_applications) | List of application IDs to exclude | `list(string)` | `[]` | no |
 | <a name="input_excluded_groups"></a> [excluded\_groups](#input\_excluded\_groups) | List of group IDs to exclude from conditional access policies (break glass accounts) | `list(string)` | n/a | yes |
 | <a name="input_excluded_locations"></a> [excluded\_locations](#input\_excluded\_locations) | List of location names to exclude | `list(string)` | `[]` | no |
+| <a name="input_excluded_platforms"></a> [excluded\_platforms](#input\_excluded\_platforms) | List of platforms to exclude from the policy | `list(string)` | `null` | no |
 | <a name="input_grant_operator"></a> [grant\_operator](#input\_grant\_operator) | Grant controls operator: OR or AND | `string` | `"OR"` | no |
 | <a name="input_included_applications"></a> [included\_applications](#input\_included\_applications) | List of application IDs to include | `list(string)` | <pre>[<br/>  "All"<br/>]</pre> | no |
 | <a name="input_included_locations"></a> [included\_locations](#input\_included\_locations) | List of location names to include | `list(string)` | `[]` | no |
+| <a name="input_included_platforms"></a> [included\_platforms](#input\_included\_platforms) | List of platforms to include in the policy. Required when using platform conditions. | `list(string)` | `null` | no |
 | <a name="input_included_user_actions"></a> [included\_user\_actions](#input\_included\_user\_actions) | List of user actions to include | `list(string)` | `null` | no |
 | <a name="input_included_users"></a> [included\_users](#input\_included\_users) | List of user IDs or groups to include | `list(string)` | <pre>[<br/>  "All"<br/>]</pre> | no |
 | <a name="input_insider_risk_levels"></a> [insider\_risk\_levels](#input\_insider\_risk\_levels) | The insider risk level to trigger the policy. This feature requires Microsoft Entra Insider Risk Management. | `string` | `null` | no |
