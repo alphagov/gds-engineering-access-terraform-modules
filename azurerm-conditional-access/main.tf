@@ -90,7 +90,7 @@ locals {
   } : {}
 
   # Build excluded users list
-  excluded_users = var.exclude_guests ? ["GuestsOrExternalUsers"] : null
+  excluded_users = var.exclude_guests ? ["GuestsOrExternalUsers"] : []
 }
 
 resource "msgraph_resource" "policy" {
