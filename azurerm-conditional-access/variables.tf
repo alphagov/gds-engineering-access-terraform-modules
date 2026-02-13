@@ -215,10 +215,10 @@ variable "excluded_platforms" {
 variable "included_service_principals" {
   description = "A list of service principal IDs explicitly included in the policy. Can be set to ServicePrincipalsInMyTenant to include all service principals. This is a mandatory argument when excluded_service_principals is set. Workload Identities Premium licenses are required to use service principal conditions in conditional access policies."
   type        = list(string)
-  default     = null
+  default     = []
 
   validation {
-    condition = var.included_service_principals == null || (alltrue([
+    condition = length(var.included_service_principals) == 0 || (alltrue([
       for sp in var.included_service_principals : sp == "ServicePrincipalsInMyTenant" || can(regex("^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$", sp))
     ]))
     error_message = "Must be a list of Entra ID Service Principal/Enterprise Application Object IDs (not to be confused with App Registration Object IDs). Can be set to ServicePrincipalsInMyTenant to include all service principals. This is a mandatory argument when excluded_service_principals is set. Workload Identities Premium licenses are required to use service principal conditions in conditional access policies."
@@ -228,12 +228,12 @@ variable "included_service_principals" {
 variable "excluded_service_principals" {
   description = "A list of service principal IDs explicitly excluded in the policy."
   type        = list(string)
-  default     = null
+  default     = []
 
   validation {
-    condition = var.excluded_service_principals == null || (alltrue([
+    condition = length(var.excluded_service_principals) == 0 || (alltrue([
       for sp in var.excluded_service_principals : can(regex("^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$", sp))
-    ]) && var.included_service_principals != null && length(var.included_service_principals) > 0)
+    ]) && length(var.included_service_principals) > 0)
     error_message = "Must be a list of Entra ID Service Principal/Enterprise Application Object IDs (not to be confused with App Registration Object IDs). Must also set included_service_principals when this argument is used."
   }
 }
