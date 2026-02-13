@@ -24,6 +24,14 @@ resource "azuread_conditional_access_policy" "policy" {
       excluded_applications = try(length(var.included_user_actions) > 0, false) ? null : var.excluded_applications
     }
 
+    dynamic "client_applications" {
+      for_each = length(var.included_service_principals) > 0 ? [1] : []
+      content {
+        included_service_principals = var.included_service_principals
+        excluded_service_principals = var.excluded_service_principals
+      }
+    }
+
     dynamic "locations" {
       for_each = length(var.included_locations) > 0 || length(var.excluded_locations) > 0 ? [1] : []
       content {
