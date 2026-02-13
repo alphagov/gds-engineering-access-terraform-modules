@@ -26,31 +26,9 @@ terraform-docs markdown table --indent 2 --output-mode inject --output-file READ
 
 ## Creating New Modules
 
-Please update the following filters when introducing a new module directory, if required:
+When naming new modules, please prefix with `azurerm-` or `msgraph-` depending on the provider used in your module. If you use both, use the prefix representing the provider you have used the most.
 
-```hcl
-# .pre-commit-config.yaml
-
-      - id: terraform_docs
-        files: ^(azurerm-conditional-access|msgraph-entra-domain)/.*\.tf$
-        args:
-          - --hook-config=--add-to-existing-output-files=true
-          - --hook-config=--output-mode=inject
-          - --hook-config=--config=.terraform-docs.yml
-```
-
-```hcl
-# .github/workflows/terraform.yml
-
-      - uses: dorny/paths-filter@de90cc6fb38fc0963ad72b210f1f284cd68cea36 # v3.0.2
-        id: filter
-        with:
-          filters: |
-            azurerm-conditional-access:
-              - 'azurerm-conditional-access/**'
-            msgraph-entra-domain:
-              - 'msgraph-entra-domain/**'
-```
+If you need to introduce a new prefix, you will need to update `.pre-commit-config.yaml` to ensure your new module is picked up by the pre-commit checks.
 
 ## Releasing Individual Modules
 

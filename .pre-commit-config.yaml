@@ -80,14 +80,15 @@ repos:
           - --args=-recursive
           - --args=-write=true
       - id: terraform_docs
-        files: ^(azurerm-conditional-access|msgraph-entra-domain)/.*\.tf$
+        # Match all module directories at the root starting with 'azurerm-' or 'msgraph-'
+        files: ^(azurerm-|msgraph-)[^/]+/
         args:
           - --hook-config=--add-to-existing-output-files=true
           - --hook-config=--output-mode=inject
           - --hook-config=--config=.terraform-docs.yml
       - id: terraform_validate
-        # Match all module directories at the root starting with 'terraform-azurerm-'
-        files: ^terraform-azurerm-[^/]+/
+        name: Terraform validate examples
+        files: ^(azurerm-|msgraph-)[^/]+/examples/
         args:
           - --args=-json
           - --args=-no-color
@@ -105,3 +106,11 @@ repos:
         args:
           - --hook-config=--parallelism-limit=1
           - --args=--skip-dirs="**/.terraform"
+  - repo: local
+    hooks:
+      - id: terraform_test
+        name: Terraform test
+        entry: bash -c 'for dir in azurerm-* msgraph-*; do [ -d "$dir" ] && terraform -chdir="$dir" test || exit 1; done'
+        language: system
+        files: \.tf$
+        pass_filenames: false
