@@ -231,9 +231,9 @@ variable "excluded_service_principals" {
   default     = []
 
   validation {
-    condition = length(var.excluded_service_principals) == 0 || (alltrue([
+    condition = length(var.excluded_service_principals) == 0 || alltrue([
       for sp in var.excluded_service_principals : can(regex("^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$", sp))
-    ]) && length(var.included_service_principals) > 0)
+    ])
     error_message = "Must be a list of Entra ID Service Principal/Enterprise Application Object IDs (not to be confused with App Registration Object IDs). Must also set included_service_principals when this argument is used."
   }
 }

@@ -11,6 +11,10 @@ resource "azuread_conditional_access_policy" "policy" {
       condition     = (var.built_in_controls != null) != (var.authentication_strength_policy_id != null)
       error_message = "Exactly one of built_in_controls or authentication_strength_policy_id must be specified, not both or neither."
     }
+    precondition {
+      condition     = length(var.excluded_service_principals) == 0 || length(var.included_service_principals) > 0
+      error_message = "Must set included_service_principals when excluded_service_principals is used."
+    }
   }
 
   conditions {
