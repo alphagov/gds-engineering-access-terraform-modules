@@ -80,14 +80,14 @@ repos:
           - --args=-recursive
           - --args=-write=true
       - id: terraform_docs
-        files: ^(azurerm-conditional-access|msgraph-entra-domain)/.*\.tf$
+        # Match all module directories at the root starting with 'azurerm-' or 'msgraph-'
+        files: ^(azurerm-|msgraph-)[^/]+/
         args:
           - --hook-config=--add-to-existing-output-files=true
           - --hook-config=--output-mode=inject
           - --hook-config=--config=.terraform-docs.yml
       - id: terraform_validate
-        # Match all module directories at the root starting with 'terraform-azurerm-'
-        files: ^terraform-azurerm-[^/]+/
+        files: ^(azurerm-|msgraph-)[^/]+/
         args:
           - --args=-json
           - --args=-no-color
