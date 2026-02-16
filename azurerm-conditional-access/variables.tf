@@ -117,10 +117,10 @@ variable "grant_operator" {
 variable "sign_in_risk_levels" {
   description = "List of sign-in risk levels to trigger the policy"
   type        = list(string)
-  default     = []
+  default     = null
 
   validation {
-    condition = alltrue([
+    condition = var.sign_in_risk_levels == null || alltrue([
       for level in var.sign_in_risk_levels :
       contains(["low", "medium", "high", "hidden", "none", "unknownFutureValue"], level)
     ])
@@ -131,10 +131,10 @@ variable "sign_in_risk_levels" {
 variable "user_risk_levels" {
   description = "List of user risk levels to trigger the policy"
   type        = list(string)
-  default     = []
+  default     = null
 
   validation {
-    condition = alltrue([
+    condition = var.user_risk_levels == null || alltrue([
       for level in var.user_risk_levels :
       contains(["low", "medium", "high", "hidden", "none", "unknownFutureValue"], level)
     ])
@@ -144,15 +144,15 @@ variable "user_risk_levels" {
 
 variable "insider_risk_levels" {
   description = "The insider risk level to trigger the policy. This feature requires Microsoft Entra Insider Risk Management."
-  type        = string
+  type        = list(string)
   default     = null
 
   validation {
-    condition = var.insider_risk_levels == null || contains(
-      ["minor", "moderate", "elevated", "unknownFutureValue"],
-      var.insider_risk_levels
-    )
-    error_message = "insider_risk_levels must be one of: minor, moderate, elevated, unknownFutureValue."
+    condition = var.insider_risk_levels == null || alltrue([
+      for level in var.insider_risk_levels :
+      contains(["minor", "moderate", "elevated", "unknownFutureValue"], level)
+    ])
+    error_message = "insider_risk_levels must contain only: minor, moderate, elevated, unknownFutureValue."
   }
 }
 
