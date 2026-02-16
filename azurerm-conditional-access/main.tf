@@ -50,8 +50,8 @@ resource "azuread_conditional_access_policy" "policy" {
       excluded_groups = var.excluded_groups
     }
 
-    sign_in_risk_levels = length(var.sign_in_risk_levels) > 0 ? var.sign_in_risk_levels : null
-    user_risk_levels    = length(var.user_risk_levels) > 0 ? var.user_risk_levels : null
+    sign_in_risk_levels = var.sign_in_risk_levels
+    user_risk_levels    = var.user_risk_levels
     insider_risk_levels = var.insider_risk_levels
 
     dynamic "platforms" {

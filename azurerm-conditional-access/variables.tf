@@ -117,10 +117,10 @@ variable "grant_operator" {
 variable "sign_in_risk_levels" {
   description = "List of sign-in risk levels to trigger the policy"
   type        = list(string)
-  default     = []
+  default     = null
 
   validation {
-    condition = alltrue([
+    condition = var.sign_in_risk_levels == null || alltrue([
       for level in var.sign_in_risk_levels :
       contains(["low", "medium", "high", "hidden", "none", "unknownFutureValue"], level)
     ])
@@ -131,10 +131,10 @@ variable "sign_in_risk_levels" {
 variable "user_risk_levels" {
   description = "List of user risk levels to trigger the policy"
   type        = list(string)
-  default     = []
+  default     = null
 
   validation {
-    condition = alltrue([
+    condition = var.user_risk_levels == null || alltrue([
       for level in var.user_risk_levels :
       contains(["low", "medium", "high", "hidden", "none", "unknownFutureValue"], level)
     ])
@@ -148,10 +148,7 @@ variable "insider_risk_levels" {
   default     = null
 
   validation {
-    condition = var.insider_risk_levels == null || contains(
-      ["minor", "moderate", "elevated", "unknownFutureValue"],
-      var.insider_risk_levels
-    )
+    condition     = var.insider_risk_levels == null || contains(["minor", "moderate", "elevated", "unknownFutureValue"], var.insider_risk_levels)
     error_message = "insider_risk_levels must be one of: minor, moderate, elevated, unknownFutureValue."
   }
 }
