@@ -14,8 +14,8 @@ permissions:
 
 jobs:
   pre-commit-checks:
-    uses: ./.github/workflows/pre-commit-checks.yml
+    uses: alphagov/gds-github-workflows/.github/workflows/terraform-module-validate.yml@v0.0.1
     permissions:
       contents: read
     with:
-      terraform-version: ${{ vars.TERRAFORM_VERSION }}
+      terraform-version: ${{ vars.TERRAFORM_VERSION || null }} # version defined by reusable workflow if not set
