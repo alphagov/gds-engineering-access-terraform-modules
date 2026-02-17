@@ -1,0 +1,21 @@
+name: Validate
+
+on:
+  push:
+    branches:
+    - main
+  pull_request:
+    branches:
+    - main
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  pre-commit-checks:
+    uses: alphagov/gds-github-workflows/.github/workflows/terraform-module-validate.yml@v0.0.5
+    permissions:
+      contents: read
+    with:
+      terraform-version: ${{ vars.TERRAFORM_VERSION || null }} # defined by reusable workflow if not set
