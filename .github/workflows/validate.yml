@@ -14,7 +14,7 @@ permissions:
 
 jobs:
   pre-commit-checks:
-    uses: alphagov/gds-github-workflows/.github/workflows/terraform-module-validate.yml@v0.0.4
+    uses: alphagov/gds-github-workflows/.github/workflows/terraform-module-validate.yml@v0.0.5
     permissions:
       contents: read
     with:
