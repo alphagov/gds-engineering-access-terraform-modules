@@ -18,4 +18,4 @@ jobs:
     permissions:
       contents: read
     with:
-      terraform-version: ${{ vars.TERRAFORM_VERSION || null }} # version defined by reusable workflow if not set
+      terraform-version: ${{ vars.TERRAFORM_VERSION || null }} # defined by reusable workflow if not set
