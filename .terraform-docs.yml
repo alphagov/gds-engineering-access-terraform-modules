@@ -18,6 +18,7 @@ output:
 
 sections:
   show:
+    - requirements
     - providers
     - inputs
     - outputs

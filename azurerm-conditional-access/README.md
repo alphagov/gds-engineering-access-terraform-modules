@@ -132,29 +132,20 @@ terraform-docs markdown table --indent 2 --output-mode inject --output-file READ
 
 | Name | Version |
 |------|---------|
-| <a name="provider_azuread"></a> [azuread](#provider\_azuread) | 3.7.0 |
-
-## Modules
-
-No modules.
-
-## Resources
-
-| Name | Type |
-|------|------|
-| [azuread_conditional_access_policy.policy](https://registry.terraform.io/providers/hashicorp/azuread/latest/docs/resources/conditional_access_policy) | resource |
+| <a name="provider_azuread"></a> [azuread](#provider\_azuread) | ~> 3.7 |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_excluded_groups"></a> [excluded\_groups](#input\_excluded\_groups) | List of group IDs to exclude from conditional access policies (break glass accounts) | `list(string)` | n/a | yes |
+| <a name="input_policy_name"></a> [policy\_name](#input\_policy\_name) | The display name of the conditional access policy | `string` | n/a | yes |
 | <a name="input_authentication_flow_transfer_methods"></a> [authentication\_flow\_transfer\_methods](#input\_authentication\_flow\_transfer\_methods) | A list of authentication flow transfer methods included in the policy | `list(string)` | `[]` | no |
 | <a name="input_authentication_strength_policy_id"></a> [authentication\_strength\_policy\_id](#input\_authentication\_strength\_policy\_id) | ID of the authentication strength policy to require. Must be a full resource path i.e. /policies/authenticationStrengthPolicies/<UUID>. See https://learn.microsoft.com/en-us/entra/identity/authentication/concept-authentication-strengths#built-in-authentication-strengths. | `string` | `null` | no |
 | <a name="input_built_in_controls"></a> [built\_in\_controls](#input\_built\_in\_controls) | List of built-in grant controls (block, mfa, compliantDevice, etc.). Cannot be used together with authentication\_strength\_policy\_id. | `list(string)` | `null` | no |
 | <a name="input_client_app_types"></a> [client\_app\_types](#input\_client\_app\_types) | List of client app types to include | `list(string)` | <pre>[<br/>  "all"<br/>]</pre> | no |
 | <a name="input_exclude_guests"></a> [exclude\_guests](#input\_exclude\_guests) | Whether to exclude guests and external users | `bool` | `false` | no |
 | <a name="input_excluded_applications"></a> [excluded\_applications](#input\_excluded\_applications) | List of application IDs to exclude | `list(string)` | `[]` | no |
-| <a name="input_excluded_groups"></a> [excluded\_groups](#input\_excluded\_groups) | List of group IDs to exclude from conditional access policies (break glass accounts) | `list(string)` | n/a | yes |
 | <a name="input_excluded_locations"></a> [excluded\_locations](#input\_excluded\_locations) | List of location names to exclude | `list(string)` | `[]` | no |
 | <a name="input_excluded_platforms"></a> [excluded\_platforms](#input\_excluded\_platforms) | List of platforms to exclude from the policy | `list(string)` | `null` | no |
 | <a name="input_excluded_service_principals"></a> [excluded\_service\_principals](#input\_excluded\_service\_principals) | A list of service principal IDs explicitly excluded in the policy. | `list(string)` | `[]` | no |
@@ -166,7 +157,6 @@ No modules.
 | <a name="input_included_user_actions"></a> [included\_user\_actions](#input\_included\_user\_actions) | List of user actions to include | `list(string)` | `null` | no |
 | <a name="input_included_users"></a> [included\_users](#input\_included\_users) | List of user IDs or groups to include | `list(string)` | <pre>[<br/>  "All"<br/>]</pre> | no |
 | <a name="input_insider_risk_levels"></a> [insider\_risk\_levels](#input\_insider\_risk\_levels) | The insider risk level to trigger the policy. This feature requires Microsoft Entra Insider Risk Management. | `string` | `null` | no |
-| <a name="input_policy_name"></a> [policy\_name](#input\_policy\_name) | The display name of the conditional access policy | `string` | n/a | yes |
 | <a name="input_policy_state"></a> [policy\_state](#input\_policy\_state) | The state of the policy: enabled, disabled, or enabledForReportingButNotEnforced | `string` | `"enabled"` | no |
 | <a name="input_sign_in_frequency"></a> [sign\_in\_frequency](#input\_sign\_in\_frequency) | Number of days or hours to enforce sign-in frequency. Required when sign\_in\_frequency\_interval is 'timeBased'. | `number` | `null` | no |
 | <a name="input_sign_in_frequency_interval"></a> [sign\_in\_frequency\_interval](#input\_sign\_in\_frequency\_interval) | The interval to apply to sign-in frequency control. | `string` | `null` | no |
