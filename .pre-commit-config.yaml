@@ -1,17 +1,14 @@
 repos:
-  # - repo: https://github.com/compilerla/conventional-pre-commit
-  #   rev: v3.6.0
-  #   hooks:
-  #     - id: conventional-pre-commit
-  #       stages:
-  #         - commit-msg
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v6.0.0
     hooks:
       - id: detect-private-key
+
       - id: check-added-large-files
         args: [ "--maxkb=800" ]
+
       - id: check-case-conflict
+
       - id: check-json
         # Exclude non-standard JSON
         exclude: |
@@ -19,17 +16,20 @@ repos:
                 .devcontainer/devcontainer.json|
                 .vscode/tasks.json
             )$
+
       - id: check-merge-conflict
-      # Seems to flag false positives
-      # - id: check-shebang-scripts-are-executable
+
       - id: check-symlinks
+
       - id: check-yaml
         args: ['--allow-multiple-documents']
         exclude: |
             (?x)^(
                 helm/.*/templates/.*\.yaml$
             )$
+
       - id: end-of-file-fixer
+
       - id: pretty-format-json
         args:
           - --autofix
@@ -40,18 +40,20 @@ repos:
                 .devcontainer/devcontainer.json|
                 .vscode/tasks.json
             )$
+
       - id: trailing-whitespace
-      #- id: no-commit-to-branch
-      #  args: ['--pattern', '^(?!((task|bug|bugfix|fix|feat|feature|chore|spike|hotfix)\/[a-zA-Z0-9\-_]+)$).*$']
+
   - repo: https://github.com/gruntwork-io/pre-commit
     rev: v0.1.24
     hooks:
       - id: shellcheck
+
   - repo: https://github.com/trussworks/pre-commit-hooks
     rev: v1.1.1
     hooks:
       - id: markdown-toc
         files: README\.md$
+
   - repo: https://github.com/codespell-project/codespell
     rev: v2.3.0
     hooks:
@@ -60,18 +62,12 @@ repos:
           - --ignore-words
           - .codespellignore
           - --write-changes
+
   - repo: https://github.com/gitleaks/gitleaks
     rev: v8.21.2
     hooks:
       - id: gitleaks
-  # - repo: local
-  #   hooks:
-  #     - id: conventional-branch-name
-  #       name: Check conventional branch name
-  #       entry: bash -c 'branch=${BRANCH_NAME:-$(git rev-parse --abbrev-ref HEAD)}; if [[ ! $branch =~ ^main|(feature|feat|fix|bugfix|hotfix|major)/[a-z0-9\-]+$ ]]; then echo "❌ Invalid branch name:" "$branch"; exit 1; fi; echo "✅ Branch name is valid."'
-  #       language: system
-  #       pass_filenames: false
-  #       always_run: true
+
   - repo: https://github.com/antonbabenko/pre-commit-terraform
     rev: v1.96.2
     hooks:
@@ -79,38 +75,41 @@ repos:
         args:
           - --args=-recursive
           - --args=-write=true
+
       - id: terraform_docs
-        # Match all module directories at the root starting with 'azurerm-' or 'msgraph-'
-        files: ^(azurerm-|msgraph-)[^/]+/
         args:
           - --hook-config=--add-to-existing-output-files=true
           - --hook-config=--output-mode=inject
           - --hook-config=--config=.terraform-docs.yml
+
       - id: terraform_validate
         name: Terraform validate examples
-        files: ^(azurerm-|msgraph-)[^/]+/examples/
         args:
           - --args=-json
           - --args=-no-color
           - --hook-config=--retry-once-with-cleanup=true
+
       - id: terraform_tflint
         args:
           - --args=--recursive
           - --args=--color
+
       - id: terraform_checkov
         args:
           - --args=--quiet
           - --args=--compact
           - --args=--skip-check "CKV_GHA_7"
+
       - id: terraform_trivy
         args:
           - --hook-config=--parallelism-limit=1
           - --args=--skip-dirs="**/.terraform"
+
   - repo: local
     hooks:
       - id: terraform_test
         name: Terraform test
-        entry: bash -c 'for dir in azurerm-* msgraph-*; do [ -d "$dir" ] && terraform -chdir="$dir" test || exit 1; done'
+        entry: bash -c 'find . -name "*.tf" -not -path "*/.terraform/*" -exec dirname {} \; | sort -u | while read dir; do terraform -chdir="$dir" test || exit 1; done'
         language: system
         files: \.tf$
         pass_filenames: false
