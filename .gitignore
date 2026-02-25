@@ -11,7 +11,7 @@ windows_*/
 *.tfstate.*
 
 # terraform lock file
-#.terraform.lock.hcl
+.terraform.lock.hcl
 
 # Crash log files
 crash.log
