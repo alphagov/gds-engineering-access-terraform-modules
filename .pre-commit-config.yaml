@@ -58,11 +58,6 @@ repos:
           - .codespellignore
           - --write-changes
 
-  - repo: https://github.com/gitleaks/gitleaks
-    rev: 6eaad039603a4de39fddd1cf5f727391efe9974e # v8.30.0
-    hooks:
-      - id: gitleaks
-
   - repo: https://github.com/antonbabenko/pre-commit-terraform
     rev: d0e12caebb2ab0ee8bf98181c8bfe9702bca103d # v1.105.0
     hooks:
