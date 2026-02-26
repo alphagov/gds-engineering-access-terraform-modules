@@ -73,14 +73,6 @@ variable "included_users" {
 variable "excluded_groups" {
   description = "List of group IDs to exclude from conditional access policies (break glass accounts)"
   type        = list(string)
-
-  validation {
-    condition = alltrue([
-      for group_id in var.excluded_groups :
-      can(regex("^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$", group_id))
-    ])
-    error_message = "All excluded_groups values must be valid Entra ID Object IDs (UUIDs in the format xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx), not display names."
-  }
 }
 
 variable "exclude_guests" {
