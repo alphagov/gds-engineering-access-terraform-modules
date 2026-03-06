@@ -10,12 +10,16 @@ on:
 
 permissions:
   contents: read
-  pull-requests: write
 
 jobs:
-  pre-commit-checks:
-    uses: alphagov/gds-github-workflows/.github/workflows/terraform-pre-commit-checks.yml@29b2abf32227088428af98e8a9278d62e6dd0c93 # v0.0.7
-    permissions:
-      contents: read
-    with:
-      terraform-version: ${{ vars.TERRAFORM_VERSION || null }} # defined by reusable workflow if not set
+  pre-commit:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+    - name: Install terraform and dependencies
+      uses: alphagov/gds-github-workflows/terraform/deps@1596944bd569e4838c1a1d5e8f71cf82e9021bf9 # v0.1.2
+
+    - name: Run pre-commit
+      uses: alphagov/gds-github-workflows/pre-commit@1596944bd569e4838c1a1d5e8f71cf82e9021bf9 # v0.1.2

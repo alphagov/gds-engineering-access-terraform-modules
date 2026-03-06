@@ -78,7 +78,7 @@ repos:
           - --args=--config=.terraform-docs.yml
 
       - id: terraform_validate
-        name: Terraform validate examples
+        name: Terraform validate modules
         args:
           - --args=-json
           - --args=-no-color
