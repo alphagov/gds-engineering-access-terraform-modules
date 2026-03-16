@@ -98,7 +98,6 @@ repos:
 
       - id: terraform_trivy
         args:
-          - --hook-config=--parallelism-limit=1
           - --args=--skip-dirs="**/.terraform"
 
   - repo: local
