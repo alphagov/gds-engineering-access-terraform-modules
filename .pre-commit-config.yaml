@@ -91,9 +91,10 @@ repos:
 
       - id: terraform_checkov
         args:
+          - --env-vars=CHECKOV_EXPERIMENTAL_TERRAFORM_MANAGED_MODULES=True
           - --args=--quiet
           - --args=--compact
-          - --args=--skip-check "CKV_GHA_7"
+          - --args=--framework=terraform
 
       - id: terraform_trivy
         args:
