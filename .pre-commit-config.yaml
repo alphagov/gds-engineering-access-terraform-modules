@@ -71,6 +71,7 @@ repos:
         files: \.tf$
         exclude: ^(\..*/|assets/)
         args:
+          - --hook-config=--create-file-if-not-exist=true
           - --args=--config=.terraform-docs.yml
 
       - id: terraform_validate
