@@ -83,8 +83,11 @@ repos:
 
       - id: terraform_tflint
         args:
+          - --args=--config=__GIT_WORKING_DIR__/.tflint.hcl
           - --args=--recursive
           - --args=--color
+          - --args=--format=compact
+          - --args=--fix
 
       - id: terraform_checkov
         args:
