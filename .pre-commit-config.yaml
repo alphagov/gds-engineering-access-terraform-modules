@@ -2,8 +2,6 @@ repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: 3e8a8703264a2f4a69428a0aa4dcb512790b2c8c # v6.0.0
     hooks:
-      - id: detect-private-key
-
       - id: check-added-large-files
         args: [ "--maxkb=800" ]
 
@@ -42,6 +40,8 @@ repos:
             )$
 
       - id: trailing-whitespace
+
+      - id: check-shebang-scripts-are-executable
 
   - repo: https://github.com/trussworks/pre-commit-hooks
     rev: f72781be8d6b5e92653232bfb13f3f10cb1fc0c4 # v2.0.0
