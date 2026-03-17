@@ -2,8 +2,6 @@ repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: 3e8a8703264a2f4a69428a0aa4dcb512790b2c8c # v6.0.0
     hooks:
-      - id: detect-private-key
-
       - id: check-added-large-files
         args: [ "--maxkb=800" ]
 
@@ -43,6 +41,8 @@ repos:
 
       - id: trailing-whitespace
 
+      - id: check-shebang-scripts-are-executable
+
   - repo: https://github.com/trussworks/pre-commit-hooks
     rev: f72781be8d6b5e92653232bfb13f3f10cb1fc0c4 # v2.0.0
     hooks:
@@ -53,10 +53,6 @@ repos:
     rev: 63c8f8312b7559622c0d82815639671ae42132ac # v2.4.1
     hooks:
       - id: codespell
-        args:
-          - --ignore-words
-          - .codespellignore
-          - --write-changes
 
   - repo: https://github.com/gitleaks/gitleaks
     rev: 6eaad039603a4de39fddd1cf5f727391efe9974e # v8.30.0
@@ -75,6 +71,7 @@ repos:
         files: \.tf$
         exclude: ^(\..*/|assets/)
         args:
+          - --hook-config=--create-file-if-not-exist=true
           - --args=--config=.terraform-docs.yml
 
       - id: terraform_validate
@@ -86,18 +83,21 @@ repos:
 
       - id: terraform_tflint
         args:
+          - --args=--config=__GIT_WORKING_DIR__/.tflint.hcl
           - --args=--recursive
           - --args=--color
+          - --args=--format=compact
+          - --args=--fix
 
       - id: terraform_checkov
         args:
+          - --env-vars=CHECKOV_EXPERIMENTAL_TERRAFORM_MANAGED_MODULES=True
           - --args=--quiet
           - --args=--compact
-          - --args=--skip-check "CKV_GHA_7"
+          - --args=--framework=terraform
 
       - id: terraform_trivy
         args:
-          - --hook-config=--parallelism-limit=1
           - --args=--skip-dirs="**/.terraform"
 
   - repo: local

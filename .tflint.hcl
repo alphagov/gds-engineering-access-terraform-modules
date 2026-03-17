@@ -1,20 +1,14 @@
-plugin "azurerm" {
-    enabled = true
-    version = "0.27.0"
-    source  = "github.com/terraform-linters/tflint-ruleset-azurerm"
+config {
+  call_module_type = "all"
+  force = false
 }
 
 plugin "terraform" {
   enabled = true
-  version = "0.10.0"
-  source  = "github.com/terraform-linters/tflint-ruleset-terraform"
+  preset  = "recommended"
 }
 
-config {
-  call_module_type = "local"
-  force            = false
-}
-
+# Rules for terraform plugin
 rule "terraform_required_providers" {
   enabled = true
 }
@@ -67,3 +61,26 @@ rule "terraform_standard_module_structure" {
 rule "terraform_workspace_remote" {
   enabled = true
 }
+# End
+
+plugin "azurerm" {
+    enabled = true
+    version = "0.27.0"
+    source  = "github.com/terraform-linters/tflint-ruleset-azurerm"
+}
+
+# Rules for terraform-sort plugin
+plugin "terraform-sort" {
+  enabled = true
+  version = "0.3.0"
+  source  = "github.com/kenske/tflint-ruleset-terraform-sort"
+}
+
+rule "terraform_list_order" {
+  enabled = true
+}
+
+rule "terraform_variables_order" {
+  enabled = false
+}
+# End
