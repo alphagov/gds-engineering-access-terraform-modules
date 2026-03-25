@@ -64,18 +64,18 @@ rule "terraform_workspace_remote" {
 # End
 
 plugin "azurerm" {
-    enabled = true
-    version = "0.27.0"
-    source  = "github.com/terraform-linters/tflint-ruleset-azurerm"
+  enabled = true
+  version = "0.31.1"
+  source  = "github.com/terraform-linters/tflint-ruleset-azurerm"
 }
 
-# Rules for terraform-sort plugin
 plugin "terraform-sort" {
   enabled = true
   version = "0.3.0"
   source  = "github.com/kenske/tflint-ruleset-terraform-sort"
 }
 
+# Rules for terraform-sort plugin
 rule "terraform_list_order" {
   enabled = true
 }
