@@ -70,6 +70,12 @@ variable "included_users" {
   default     = ["All"]
 }
 
+variable "included_groups" {
+  description = "Object IDs of groups to include in Conditional Access users condition."
+  type        = list(string)
+  default     = []
+}
+
 variable "excluded_groups" {
   description = "List of group IDs to exclude from conditional access policies (break glass accounts)"
   type        = list(string)

@@ -46,6 +46,7 @@ resource "azuread_conditional_access_policy" "policy" {
 
     users {
       included_users  = var.included_users
+      included_groups = var.included_groups
       excluded_users  = var.exclude_guests ? ["GuestsOrExternalUsers"] : []
       excluded_groups = var.excluded_groups
     }

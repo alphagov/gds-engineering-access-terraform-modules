@@ -19,6 +19,7 @@ This module creates Entra ID Conditional Access policies with a consistent, reus
 - Support for location-based policies
 - Risk-based authentication controls
 - Application and user action targeting
+- User and group targeting (`included_users`, `included_groups`)
 - Session controls (sign-in frequency)
 - Guest user exclusion options
 
@@ -35,6 +36,7 @@ module "conditional_access_policy" {
   included_locations    = ["All"]
   excluded_locations    = ["AllTrusted"]
   included_users        = ["All"]
+  included_groups       = ["target-group-object-id"]
   excluded_groups       = ["break-glass-group-id"]
   built_in_controls     = ["block"]
 
@@ -151,6 +153,7 @@ terraform-docs markdown table --indent 2 --output-mode inject --output-file READ
 | <a name="input_excluded_service_principals"></a> [excluded\_service\_principals](#input\_excluded\_service\_principals) | A list of service principal IDs explicitly excluded in the policy. | `list(string)` | `[]` | no |
 | <a name="input_grant_operator"></a> [grant\_operator](#input\_grant\_operator) | Grant controls operator: OR or AND | `string` | `"OR"` | no |
 | <a name="input_included_applications"></a> [included\_applications](#input\_included\_applications) | List of application IDs to include | `list(string)` | <pre>[<br/>  "All"<br/>]</pre> | no |
+| <a name="input_included_groups"></a> [included\_groups](#input\_included\_groups) | Object IDs of groups to include in Conditional Access users condition. | `list(string)` | `[]` | no |
 | <a name="input_included_locations"></a> [included\_locations](#input\_included\_locations) | List of location names to include | `list(string)` | `[]` | no |
 | <a name="input_included_platforms"></a> [included\_platforms](#input\_included\_platforms) | List of platforms to include in the policy. Required when using platform conditions. | `list(string)` | `null` | no |
 | <a name="input_included_service_principals"></a> [included\_service\_principals](#input\_included\_service\_principals) | A list of service principal IDs explicitly included in the policy. Can be set to ServicePrincipalsInMyTenant to include all service principals. This is a mandatory argument when excluded\_service\_principals is set. Workload Identities Premium licenses are required to use service principal conditions in conditional access policies. | `list(string)` | `[]` | no |
