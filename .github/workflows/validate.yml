@@ -24,6 +24,8 @@ jobs:
 
     - name: Install terraform and dependencies
       uses: alphagov/gds-github-workflows/terraform/deps@47ffdc3007aef6b4857115b97135ed8b7b7c18ca # v0.1.7
+      with:
+        trivy-version: v0.69.3
 
     - name: Run pre-commit
       uses: alphagov/gds-github-workflows/pre-commit@0887a2b5712cf4e192ca4340f7c494606672a6bf # v0.1.6
