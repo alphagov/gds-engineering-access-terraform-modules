@@ -6,13 +6,20 @@ on:
     tags:
       - "*/v*"  # Matches tags like azurerm-conditional-access/v1.0.0
 
+# NOTE: This declaration defaults all GH other permissions to none.
+# - Create subsequent permissions scoped to job only after confirming with a techlead
+# - Declaration here follows the policy defined in ADR-EA007
 permissions:
-  contents: write
+  contents: none # Set so other permissions take the value 'none' by default
+  id-token: none # Prevent OIDC token generation (‘none’ is the default)
+  packages: none # Prevent package access (‘none’ is the default)
 
 jobs:
   extract-module:
     name: Extract Module Info
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     outputs:
       module-name: ${{ steps.extract.outputs.module }}
       version: ${{ steps.extract.outputs.version }}
@@ -30,6 +37,8 @@ jobs:
   release:
     uses: alphagov/gds-github-workflows/.github/workflows/terraform-module-release.yml@7b4a3ee296ab78c4cfa5aec390d6c5a989d7c601 # v0.1.10
     name: GitHub Release
+    permissions:
+      contents: write
     needs: extract-module
     with:
       module-name: ${{ needs.extract-module.outputs.module-name }}
