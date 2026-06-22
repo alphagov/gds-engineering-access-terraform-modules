@@ -26,7 +26,7 @@ jobs:
       uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
 
     - name: Install terraform and dependencies
-      uses: alphagov/gds-tech-and-security-github-actions/terraform/deps@195d742673ad36cd67aa1dd8847974d034668d1a # v0.1.17
+      uses: alphagov/gds-tech-and-security-github-actions/terraform/deps@b3feeff4a9b734aa33f2ef59c4cb1a82eb239937 # v0.1.19
 
     - name: Run pre-commit
-      uses: alphagov/gds-tech-and-security-github-actions/pre-commit@195d742673ad36cd67aa1dd8847974d034668d1a # v0.1.17
+      uses: alphagov/gds-tech-and-security-github-actions/pre-commit@b3feeff4a9b734aa33f2ef59c4cb1a82eb239937 # v0.1.19
