@@ -124,20 +124,20 @@ terraform-docs markdown table --indent 2 --output-mode inject --output-file READ
 ## Requirements
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.11.0 |
 | <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) | ~> 3.7 |
 
 ## Providers
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="provider_azuread"></a> [azuread](#provider\_azuread) | ~> 3.7 |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
+| ---- | ----------- | ---- | ------- | :------: |
 | <a name="input_excluded_groups"></a> [excluded\_groups](#input\_excluded\_groups) | List of group IDs to exclude from conditional access policies (break glass accounts) | `list(string)` | n/a | yes |
 | <a name="input_policy_name"></a> [policy\_name](#input\_policy\_name) | The display name of the conditional access policy | `string` | n/a | yes |
 | <a name="input_authentication_flow_transfer_methods"></a> [authentication\_flow\_transfer\_methods](#input\_authentication\_flow\_transfer\_methods) | A list of authentication flow transfer methods included in the policy | `list(string)` | `[]` | no |
@@ -168,7 +168,7 @@ terraform-docs markdown table --indent 2 --output-mode inject --output-file READ
 ## Outputs
 
 | Name | Description |
-|------|-------------|
+| ---- | ----------- |
 | <a name="output_policy_display_name"></a> [policy\_display\_name](#output\_policy\_display\_name) | The display name of the conditional access policy |
 | <a name="output_policy_id"></a> [policy\_id](#output\_policy\_id) | The ID of the conditional access policy |
 | <a name="output_policy_object_id"></a> [policy\_object\_id](#output\_policy\_object\_id) | The object ID of the conditional access policy |
