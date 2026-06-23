@@ -5,8 +5,6 @@
   ***** CAUTION: DO NOT EDIT ABOVE THIS LINE ******
 -->
 
-![Github Actions](../../actions/workflows/terraform.yml/badge.svg)
-
 # azurerm-conditional-access
 
 ## Description
