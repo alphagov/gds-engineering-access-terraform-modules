@@ -19,7 +19,7 @@ This module creates Entra ID Conditional Access policies with a consistent, reus
 - Support for location-based policies
 - Risk-based authentication controls
 - Application and user action targeting
-- User and group targeting (`included_users`, `included_groups`)
+- User, group, and role targeting (`included_users`, `included_groups`, `included_roles`)
 - Session controls (sign-in frequency)
 - Guest user exclusion options
 
@@ -37,7 +37,9 @@ module "conditional_access_policy" {
   excluded_locations    = ["AllTrusted"]
   included_users        = ["All"]
   included_groups       = ["target-group-object-id"]
+  included_roles        = ["directory-role-object-id"]
   excluded_groups       = ["break-glass-group-id"]
+  excluded_roles        = ["directory-role-object-id"]
   built_in_controls     = ["block"]
 
 }
@@ -126,20 +128,20 @@ terraform-docs markdown table --indent 2 --output-mode inject --output-file READ
 ## Requirements
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.11.0 |
 | <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) | ~> 3.7 |
 
 ## Providers
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="provider_azuread"></a> [azuread](#provider\_azuread) | ~> 3.7 |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
+| ---- | ----------- | ---- | ------- | :------: |
 | <a name="input_excluded_groups"></a> [excluded\_groups](#input\_excluded\_groups) | List of group IDs to exclude from conditional access policies (break glass accounts) | `list(string)` | n/a | yes |
 | <a name="input_policy_name"></a> [policy\_name](#input\_policy\_name) | The display name of the conditional access policy | `string` | n/a | yes |
 | <a name="input_authentication_flow_transfer_methods"></a> [authentication\_flow\_transfer\_methods](#input\_authentication\_flow\_transfer\_methods) | A list of authentication flow transfer methods included in the policy | `list(string)` | `[]` | no |
@@ -150,12 +152,14 @@ terraform-docs markdown table --indent 2 --output-mode inject --output-file READ
 | <a name="input_excluded_applications"></a> [excluded\_applications](#input\_excluded\_applications) | List of application IDs to exclude | `list(string)` | `[]` | no |
 | <a name="input_excluded_locations"></a> [excluded\_locations](#input\_excluded\_locations) | List of location names to exclude | `list(string)` | `[]` | no |
 | <a name="input_excluded_platforms"></a> [excluded\_platforms](#input\_excluded\_platforms) | List of platforms to exclude from the policy | `list(string)` | `null` | no |
+| <a name="input_excluded_roles"></a> [excluded\_roles](#input\_excluded\_roles) | Object IDs of directory roles to exclude from Conditional Access users condition. | `list(string)` | `[]` | no |
 | <a name="input_excluded_service_principals"></a> [excluded\_service\_principals](#input\_excluded\_service\_principals) | A list of service principal IDs explicitly excluded in the policy. | `list(string)` | `[]` | no |
 | <a name="input_grant_operator"></a> [grant\_operator](#input\_grant\_operator) | Grant controls operator: OR or AND | `string` | `"OR"` | no |
 | <a name="input_included_applications"></a> [included\_applications](#input\_included\_applications) | List of application IDs to include | `list(string)` | <pre>[<br/>  "All"<br/>]</pre> | no |
 | <a name="input_included_groups"></a> [included\_groups](#input\_included\_groups) | Object IDs of groups to include in Conditional Access users condition. | `list(string)` | `[]` | no |
 | <a name="input_included_locations"></a> [included\_locations](#input\_included\_locations) | List of location names to include | `list(string)` | `[]` | no |
 | <a name="input_included_platforms"></a> [included\_platforms](#input\_included\_platforms) | List of platforms to include in the policy. Required when using platform conditions. | `list(string)` | `null` | no |
+| <a name="input_included_roles"></a> [included\_roles](#input\_included\_roles) | Object IDs of directory roles to include in Conditional Access users condition. | `list(string)` | `[]` | no |
 | <a name="input_included_service_principals"></a> [included\_service\_principals](#input\_included\_service\_principals) | A list of service principal IDs explicitly included in the policy. Can be set to ServicePrincipalsInMyTenant to include all service principals. This is a mandatory argument when excluded\_service\_principals is set. Workload Identities Premium licenses are required to use service principal conditions in conditional access policies. | `list(string)` | `[]` | no |
 | <a name="input_included_user_actions"></a> [included\_user\_actions](#input\_included\_user\_actions) | List of user actions to include | `list(string)` | `null` | no |
 | <a name="input_included_users"></a> [included\_users](#input\_included\_users) | List of user IDs or groups to include | `list(string)` | <pre>[<br/>  "All"<br/>]</pre> | no |
@@ -170,7 +174,7 @@ terraform-docs markdown table --indent 2 --output-mode inject --output-file READ
 ## Outputs
 
 | Name | Description |
-|------|-------------|
+| ---- | ----------- |
 | <a name="output_policy_display_name"></a> [policy\_display\_name](#output\_policy\_display\_name) | The display name of the conditional access policy |
 | <a name="output_policy_id"></a> [policy\_id](#output\_policy\_id) | The ID of the conditional access policy |
 | <a name="output_policy_object_id"></a> [policy\_object\_id](#output\_policy\_object\_id) | The object ID of the conditional access policy |

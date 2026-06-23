@@ -76,9 +76,21 @@ variable "included_groups" {
   default     = []
 }
 
+variable "included_roles" {
+  description = "Object IDs of directory roles to include in Conditional Access users condition."
+  type        = list(string)
+  default     = []
+}
+
 variable "excluded_groups" {
   description = "List of group IDs to exclude from conditional access policies (break glass accounts)"
   type        = list(string)
+}
+
+variable "excluded_roles" {
+  description = "Object IDs of directory roles to exclude from Conditional Access users condition."
+  type        = list(string)
+  default     = []
 }
 
 variable "exclude_guests" {

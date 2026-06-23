@@ -76,21 +76,21 @@ The destruction of the domain can only happen in the following conditions:
 ## Requirements
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.13 |
 | <a name="requirement_msgraph"></a> [msgraph](#requirement\_msgraph) | ~> 0.3 |
 
 ## Providers
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="provider_msgraph"></a> [msgraph](#provider\_msgraph) | ~> 0.3 |
 | <a name="provider_terraform"></a> [terraform](#provider\_terraform) | n/a |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
+| ---- | ----------- | ---- | ------- | :------: |
 | <a name="input_name"></a> [name](#input\_name) | Fully qualified domain name to add to the Microsoft Entra ID tenancy | `string` | n/a | yes |
 | <a name="input_default"></a> [default](#input\_default) | Whether to set this domain as default for new users. This is the same as making it the Primary domain.<br/>Only a value of 'true' is allowed, since it is not possible to demote a domain. Demotion happens by the virtue of promoting another domain to be the default. | `bool` | `null` | no |
 | <a name="input_verify"></a> [verify](#input\_verify) | Whether to automatically verify the domain (requires DNS verification records to be added) | `bool` | `false` | no |
@@ -98,6 +98,6 @@ The destruction of the domain can only happen in the following conditions:
 ## Outputs
 
 | Name | Description |
-|------|-------------|
+| ---- | ----------- |
 | <a name="output_domain_verification_dns_records"></a> [domain\_verification\_dns\_records](#output\_domain\_verification\_dns\_records) | DNS records required by Entra for domain verification<br/><br/>The records become available after setting up the domain in Entra.<br/>They remain active until the domain is verified. Afterwards, the records will be emptied out automatically<br/>`terraform plan` will show a diff after verification to clear them<br/>The diff changes have no consequence and can be safely applied |
 <!-- END_TF_DOCS -->
