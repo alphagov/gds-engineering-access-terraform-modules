@@ -77,7 +77,7 @@ variable "included_groups" {
 }
 
 variable "included_roles" {
-  description = "Object IDs of directory roles to include in Conditional Access users condition."
+  description = "Directory role template IDs to include in Conditional Access users condition."
   type        = list(string)
   default     = []
 }
@@ -88,7 +88,7 @@ variable "excluded_groups" {
 }
 
 variable "excluded_roles" {
-  description = "Object IDs of directory roles to exclude from Conditional Access users condition."
+  description = "Directory role template IDs to exclude from Conditional Access users condition."
   type        = list(string)
   default     = []
 }
