@@ -31,7 +31,9 @@ module "conditional_access_policies" {
   included_locations                   = lookup(each.value, "included_locations", [])
   excluded_locations                   = lookup(each.value, "excluded_locations", [])
   included_users                       = lookup(each.value, "included_users", ["All"])
+  included_roles                       = lookup(each.value, "included_roles", [])
   excluded_groups                      = each.value["excluded_groups"]
+  excluded_roles                       = lookup(each.value, "excluded_roles", [])
   exclude_guests                       = lookup(each.value, "exclude_guests", false)
   grant_operator                       = lookup(each.value, "grant_operator", "OR")
   built_in_controls                    = lookup(each.value, "built_in_controls", [])
