@@ -36,7 +36,7 @@ module "conditional_access_policy" {
   included_users        = ["All"]
   included_groups       = ["target-group-object-id"]
   included_roles        = ["directory-role-template-id"]
-  excluded_groups       = ["break-glass-group-id"]
+  excluded_groups       = ["break-glass-group-object-id"]
   excluded_roles        = ["directory-role-template-id"]
   built_in_controls     = ["block"]
 }
@@ -55,7 +55,7 @@ module "mfa_with_auth_strength" {
 
   included_applications = ["All"]
   included_users        = ["All"]
-  excluded_groups       = ["break-glass-group-id"]
+  excluded_groups       = ["break-glass-group-object-id"]
 }
 ```
 
@@ -101,7 +101,7 @@ module "admin_role_phishing_resistant_mfa" {
   included_applications             = ["All"]
   included_users                    = ["None"]
   included_roles                    = ["directory-role-template-id"]
-  excluded_groups                   = ["break-glass-group-id"]
+  excluded_groups                   = ["break-glass-group-object-id"]
   authentication_strength_policy_id = "/policies/authenticationStrengthPolicies/00000000-0000-0000-0000-000000000004"
 }
 ```
