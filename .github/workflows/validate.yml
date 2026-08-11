@@ -29,4 +29,4 @@ jobs:
       uses: alphagov/gds-tech-and-security-github-actions/terraform/deps@b3feeff4a9b734aa33f2ef59c4cb1a82eb239937 # v0.1.19
 
     - name: Run pre-commit
-      uses: alphagov/gds-tech-and-security-github-actions/pre-commit@b3feeff4a9b734aa33f2ef59c4cb1a82eb239937 # v0.1.19
+      uses: alphagov/gds-tech-and-security-github-actions/pre-commit@e46e2a6408fa36c6d07980d469710abe9b4cee60 # v0.1.21
