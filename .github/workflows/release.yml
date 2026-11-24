@@ -35,7 +35,7 @@ jobs:
           echo "Module: ${MODULE}, Version: ${VERSION}"
 
   release:
-    uses: alphagov/gds-tech-and-security-github-actions/.github/workflows/terraform-module-release.yml@4b0a3ad58c1ea4b3ff1d5ed0a5ae6bc1c91455ec # v0.1.22
+    uses: alphagov/gds-tech-and-security-github-actions/.github/workflows/terraform-module-release.yml@057f1855fd42ef7c7115d6c69dec6f83606be58d # v0.1.23
     name: GitHub Release
     permissions:
       contents: write
